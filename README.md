@@ -12,7 +12,15 @@ This application is a sandbox environment designed to experiment with and test s
 - **Target SDK:** 34 (Android Upside Down Cake)
 
 ## Installation
-Clone the repository
+1. Clone the repository
+2. Navigate to https://api.themoviedb.org/ and create an account and API Key
+3. Make a copy of app.properties.example file named app.properties
+4. Add the API Key to the TMDB_API_KEY value in app.properties file
+
+## Notable Libraries Used
+- Compose
+- Retrofit
+- Moshi
 
 ## Contact
 John Idasetima - jidasetima@gmail.com
