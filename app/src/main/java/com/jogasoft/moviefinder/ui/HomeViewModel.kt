@@ -5,14 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jogasoft.moviefinder.data.Movie
 import com.jogasoft.moviefinder.data.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel: ViewModel() {
-    private val movieRepository = MovieRepository()
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val movieRepository: MovieRepository
+): ViewModel() {
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e("HomeViewModel", "Coroutine Failed", throwable)
     }
