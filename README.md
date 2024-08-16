@@ -3,8 +3,8 @@
 This application is a sandbox environment designed to experiment with and test some of the latest Android features and best practices. The app utilizes the [The Movie Database (TMDb) API](https://api.themoviedb.org/) to fetch and display movie data.
 
 ## Features
-
-- tbd
+- Fetches and Displays posters of latest Now Playing movies from https://api.themoviedb.org/
+- Upcoming: tbd
 
 ## Requirements
 
@@ -16,11 +16,6 @@ This application is a sandbox environment designed to experiment with and test s
 2. Navigate to https://api.themoviedb.org/ and create an account and API Key
 3. Make a copy of app.properties.example file named app.properties
 4. Add the API Key to the TMDB_API_KEY value in app.properties file
-
-## Notable Libraries Used
-- Compose
-- Retrofit
-- Moshi
 
 ## Contact
 John Idasetima - jidasetima@gmail.com
