@@ -20,8 +20,8 @@ android {
         applicationId = "com.jogasoft.moviefinder"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "0.0.1"
+        versionCode = 2
+        versionName = "0.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -29,6 +29,8 @@ android {
         }
 
         buildConfigField("String", "TMDB_API_KEY", "\"${appProperties.getProperty("TMDB_API_KEY", "")}\"")
+        buildConfigField("String", "BASE_TMDB_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "BASE_TMDB_IMAGE_URL", "\"https://image.tmdb.org/t/p/\"")
     }
 
     buildTypes {
@@ -68,6 +70,10 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Coil
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
 
     // Compose
     implementation(platform(libs.androidx.compose.bom))
