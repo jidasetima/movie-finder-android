@@ -1,12 +1,12 @@
 package com.jogasoft.moviefinder.data
 
-import com.jogasoft.moviefinder.data.source.network.DefaultMovieNetworkDataSource
+import com.jogasoft.moviefinder.data.source.network.MovieNetworkDataSource
 import com.jogasoft.moviefinder.data.source.network.model.movie.toMovies
 import kotlinx.coroutines.CancellationException
 import javax.inject.Inject
 
 class DefaultMovieRepository @Inject constructor(
-    private val movieNetworkDataSource: DefaultMovieNetworkDataSource
+    private val movieNetworkDataSource: MovieNetworkDataSource
 ) : MovieRepository {
     override suspend fun getNowPlayingMovies(): Result<List<Movie>> {
         return try {

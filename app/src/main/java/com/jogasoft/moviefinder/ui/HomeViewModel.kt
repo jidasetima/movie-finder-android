@@ -1,12 +1,10 @@
 package com.jogasoft.moviefinder.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jogasoft.moviefinder.data.Movie
 import com.jogasoft.moviefinder.data.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -17,9 +15,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ): ViewModel() {
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        Log.e("HomeViewModel", "Coroutine Failed", throwable)
-    }
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState = _uiState.asStateFlow()
 
@@ -28,19 +23,20 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getNowPlayingMovieList() {
-        viewModelScope.launch(exceptionHandler) {
+        viewModelScope.launch {
             val response = movieRepository.getNowPlayingMovies()
-            response.onSuccess { movieList ->
-                _uiState.update {
-                    it.copy(
-                        nowPlayingMovies = movieList
-                    )
+            response.fold(
+                onSuccess = { movieList ->
+                    _uiState.update {
+                        it.copy(
+                            nowPlayingMovies = movieList
+                        )
+                    }
+                },
+                onFailure = {
+                    //todo: show error state
                 }
-            }
-
-            response.onFailure {
-                //todo: show error state
-            }
+            )
         }
     }
 }
