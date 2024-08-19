@@ -1,6 +1,4 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent
 import java.util.Properties
-import org.gradle.api.tasks.testing.Test
 
 plugins {
     alias(libs.plugins.android.application)
