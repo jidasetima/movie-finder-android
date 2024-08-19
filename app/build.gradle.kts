@@ -63,7 +63,9 @@ android {
     }
 
     testOptions {
-        unitTests.isReturnDefaultValues = true
+        unitTests {
+            isReturnDefaultValues = true
+        }
     }
 }
 
@@ -110,4 +112,17 @@ dependencies {
     // Debug
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+// Gradle unit test task config
+tasks.withType<Test> {
+    // prevents gradle task caching while running tests
+    outputs.upToDateWhen{ false }
+
+    if (name.contains("UnitTest")) {
+        testLogging {
+            events("passed", "skipped", "failed", "standardOut", "standardError")
+            showStandardStreams = true
+        }
+    }
 }
