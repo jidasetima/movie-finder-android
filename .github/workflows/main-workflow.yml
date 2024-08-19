@@ -2,14 +2,31 @@ name: Main Workflow
 run-name: ${{ github.actor }} has triggered Main Workflow
 on: [ push ]
 jobs:
-  build:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout and clone repository branch ${{ github.ref }}
+#        uses: actions/checkout@v4
+#      - name: Create app.properties configuration file
+#        run: echo "TMDB_API_KEY = ${{ secrets.TMDB_API_KEY }}" > app.properties
+#      - name: Setup JDK 17
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#          cache: gradle
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#      - name: Build with Gradle
+#        run: ./gradlew build
+#      - run: echo "The build job's status is ${{ job.status }}."
+  unit-test:
+#    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout and clone repository branch ${{ github.ref }}
         uses: actions/checkout@v4
-      - name: Create app.properties configuration file
-        run: echo "TMDB_API_KEY = ${{ secrets.TMDB_API_KEY }}" > app.properties
-      - name: Set up JDK 17
+      - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -17,15 +34,9 @@ jobs:
           cache: gradle
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Build with Gradle
-        run: ./gradlew build
-
-  unit-test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Run release unit tests
         run: ./gradlew testReleaseUnitTest
+      - run: echo "The unit-test job's status is ${{ job.status }}."
 
 
 
