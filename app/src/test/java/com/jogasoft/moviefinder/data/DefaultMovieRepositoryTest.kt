@@ -9,7 +9,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import kotlin.random.Random
 
-
 class DefaultMovieRepositoryTest {
     private val networkMovies = List(20) { index ->
         NetworkMovie(
@@ -44,6 +43,48 @@ class DefaultMovieRepositoryTest {
     fun `getNowPlayingMovies returns failure with expected result`() = runTest {
         movieNetworkDataSource.shouldReturnFailureResult = true
         val response = movieRepository.getNowPlayingMovies()
+        assertTrue(response.isFailure)
+    }
+
+    @Test
+    fun `getPopularMovies returns success with expected result`() = runTest {
+        val response = movieRepository.getPopularMovies()
+        assertTrue(response.isSuccess)
+        assertEquals(response.getOrNull(), networkMovies.toMovies())
+    }
+
+    @Test
+    fun `getPopularMovies returns failure with expected result`() = runTest {
+        movieNetworkDataSource.shouldReturnFailureResult = true
+        val response = movieRepository.getPopularMovies()
+        assertTrue(response.isFailure)
+    }
+
+    @Test
+    fun `getTopRatedMovies returns success with expected result`() = runTest {
+        val response = movieRepository.getTopRatedMovies()
+        assertTrue(response.isSuccess)
+        assertEquals(response.getOrNull(), networkMovies.toMovies())
+    }
+
+    @Test
+    fun `getTopRatedMovies returns failure with expected result`() = runTest {
+        movieNetworkDataSource.shouldReturnFailureResult = true
+        val response = movieRepository.getTopRatedMovies()
+        assertTrue(response.isFailure)
+    }
+
+    @Test
+    fun `getUpcomingMovies returns success with expected result`() = runTest {
+        val response = movieRepository.getUpcomingMovies()
+        assertTrue(response.isSuccess)
+        assertEquals(response.getOrNull(), networkMovies.toMovies())
+    }
+
+    @Test
+    fun `getUpcomingMovies returns failure with expected result`() = runTest {
+        movieNetworkDataSource.shouldReturnFailureResult = true
+        val response = movieRepository.getUpcomingMovies()
         assertTrue(response.isFailure)
     }
 }

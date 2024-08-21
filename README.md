@@ -3,11 +3,14 @@
 This application is a sandbox environment designed to experiment with and test some of the latest Android features and best practices. The app utilizes the [The Movie Database (TMDb) API](https://api.themoviedb.org/) to fetch and display movie data.
 
 ## Features
-- Fetches and Displays posters of latest Now Playing movies from https://api.themoviedb.org/
+- Fetches and Displays posters of latest movies from the following https://api.themoviedb.org/ categories
+  - Now Playing
+  - Popular
+  - Top Rated
+  - Upcoming
 - Upcoming: tbd
 
 ## Requirements
-
 - **Minimum SDK:** 24 (Android 7.0 Nougat)
 - **Target SDK:** 34 (Android Upside Down Cake)
 
