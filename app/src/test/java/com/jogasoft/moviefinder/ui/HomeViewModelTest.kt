@@ -42,7 +42,32 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `initializes uiState with nowPlayingMovies on ViewModel init`() = runTest {
+    fun `HomeUiState initializes with correct default values`() {
+        val homeUiState = HomeUiState()
+
+        assertEquals(listOf<Movie>(), homeUiState.nowPlayingMovies)
+        assertEquals(listOf<Movie>(), homeUiState.popularMovies)
+        assertEquals(listOf<Movie>(), homeUiState.topRatedMovies)
+        assertEquals(listOf<Movie>(), homeUiState.upcomingMovies)
+    }
+
+    @Test
+    fun `initializes uiState with now playing movies on ViewModel init`() = runTest {
         assertEquals(movies, homeViewModel.uiState.value.nowPlayingMovies)
+    }
+
+    @Test
+    fun `initializes uiState with popular movies on ViewModel init`() = runTest {
+        assertEquals(movies, homeViewModel.uiState.value.popularMovies)
+    }
+
+    @Test
+    fun `initializes uiState with top rated on ViewModel init`() = runTest {
+        assertEquals(movies, homeViewModel.uiState.value.topRatedMovies)
+    }
+
+    @Test
+    fun `initializes uiState with upcoming on ViewModel init`() = runTest {
+        assertEquals(movies, homeViewModel.uiState.value.upcomingMovies)
     }
 }

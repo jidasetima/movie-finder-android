@@ -13,4 +13,25 @@ class FakeMovieNetworkDataSource(
             else -> Result.success(networkMovies)
         }
     }
+
+    override suspend fun getPopularMovies(): Result<List<NetworkMovie>> {
+        return when {
+            shouldReturnFailureResult -> Result.failure(Exception())
+            else -> Result.success(networkMovies)
+        }
+    }
+
+    override suspend fun getTopRatedMovies(): Result<List<NetworkMovie>> {
+        return when {
+            shouldReturnFailureResult -> Result.failure(Exception())
+            else -> Result.success(networkMovies)
+        }
+    }
+
+    override suspend fun getUpcomingMovies(): Result<List<NetworkMovie>> {
+        return when {
+            shouldReturnFailureResult -> Result.failure(Exception())
+            else -> Result.success(networkMovies)
+        }
+    }
 }

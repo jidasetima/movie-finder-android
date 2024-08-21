@@ -9,12 +9,15 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -31,31 +34,77 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     uiState: HomeUiState
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 100.dp),
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(4.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = PaddingValues(horizontal = 8.dp)
     ) {
-        items(
-            items = uiState.nowPlayingMovies,
-            key = { movie -> movie.id }
-        ) { movie ->
-            SubcomposeAsyncImage(
-                model = "${BuildConfig.BASE_TMDB_IMAGE_URL}/w400/${movie.posterPath}",
-                loading = {
-                    AnimatedPlaceholderMovie()
-                },
-                error = {
-                    AnimatedPlaceholderMovie()
-                },
-                contentDescription = "${movie.title} image",
-                modifier = Modifier.aspectRatio(2f / 3f)
+        item {
+            LazyMovieRow(
+                sectionTitle = "Now Playing",
+                movies = uiState.nowPlayingMovies
+            )
+        }
+
+        item {
+            LazyMovieRow(
+                sectionTitle = "Popular",
+                movies = uiState.popularMovies
+            )
+        }
+
+        item {
+            LazyMovieRow(
+                sectionTitle = "Top Rated",
+                movies = uiState.topRatedMovies
+            )
+        }
+
+        item {
+            LazyMovieRow(
+                sectionTitle = "Upcoming",
+                movies = uiState.upcomingMovies
             )
         }
     }
 }
+
+@Composable
+private fun LazyMovieRow(
+    modifier: Modifier = Modifier,
+    sectionTitle: String,
+    movies: List<Movie>
+) {
+    Column(
+        modifier = modifier
+    ) {
+        Text(sectionTitle)
+
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(
+                items = movies,
+                key = { movie -> movie.id }
+            ) { movie ->
+                SubcomposeAsyncImage(
+                    model = "${BuildConfig.BASE_TMDB_IMAGE_URL}/w400/${movie.posterPath}",
+                    loading = {
+                        AnimatedPlaceholderMovie()
+                    },
+                    error = {
+                        AnimatedPlaceholderMovie()
+                    },
+                    contentDescription = "${movie.title} image",
+                    modifier = Modifier.aspectRatio(2f / 3f)
+                )
+            }
+        }
+    }
+}
+
 
 @Composable
 private fun AnimatedPlaceholderMovie() {
@@ -68,8 +117,9 @@ private fun AnimatedPlaceholderMovie() {
             repeatMode = RepeatMode.Reverse,
         ), label = "AnimatedPlaceholderMovie Color"
     )
-    Box(modifier = Modifier
-        .background(color)
+    Box(
+        modifier = Modifier
+            .background(color)
     )
 }
 
@@ -77,18 +127,21 @@ private fun AnimatedPlaceholderMovie() {
 @Preview
 @Composable
 fun PreviewHomeScreen() {
+    val movies = List(20) { index ->
+        Movie(
+            id = index,
+            backdropPath = "/backdrop1.jpg",
+            overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
+            posterPath = "/poster1.jpg",
+            releaseDate = "2023-07-15",
+            title = "The Hidden Depths"
+        )
+    }
+
     HomeScreen(
         uiState = HomeUiState(
-            nowPlayingMovies = List(20) { index: Int ->
-                Movie(
-                    id = index,
-                    backdropPath = "/backdrop1.jpg",
-                    overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
-                    posterPath = "/poster1.jpg",
-                    releaseDate = "2023-07-15",
-                    title = "The Hidden Depths"
-                )
-            }
+            nowPlayingMovies = movies,
+            popularMovies = movies
         )
     )
 }

@@ -11,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -26,9 +27,21 @@ abstract class NetworkModule {
         @Provides
         fun providesRetrofit(): Retrofit {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    val originalRequest = chain.request()
+
+                    val authorizedRequest = originalRequest.newBuilder()
+                        .addHeader("Authorization", "Bearer ${BuildConfig.TMDB_API_KEY}")
+                        .build()
+
+                     chain.proceed(authorizedRequest)
+                }
+                .build()
 
             return Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_TMDB_URL)
+                .client(okHttpClient)
                 .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
         }
 
