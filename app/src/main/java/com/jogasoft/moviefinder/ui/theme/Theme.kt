@@ -8,28 +8,55 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Blue80,
+    onPrimary = Blue20,
+    primaryContainer = Blue30,
+    onPrimaryContainer = Blue90,
+    secondary = DarkBlue80,
+    onSecondary = DarkBlue20,
+    secondaryContainer = DarkBlue30,
+    onSecondaryContainer = DarkBlue90,
+    error = Red80,
+    onError = Red20,
+    errorContainer = Red30,
+    onErrorContainer = Red90,
+    background = DarkBlueGray10,
+    onBackground = DarkBlueGray90,
+    surface = DarkBlueGray10,
+    onSurface = DarkBlueGray90,
+    surfaceVariant = BlueGray30,
+    onSurfaceVariant = BlueGray80,
+    inverseSurface = DarkBlueGray90,
+    inverseOnSurface = DarkBlueGray10,
+    outline = BlueGray60
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
+    primary = Blue40,
     onPrimary = Color.White,
+    primaryContainer = Blue90,
+    onPrimaryContainer = Blue10,
+    secondary = DarkBlue40,
     onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    secondaryContainer = Blue90,
+    onSecondaryContainer = Blue10,
+    error = Red40,
+    onError = Color.White,
+    errorContainer = Red90,
+    onErrorContainer = Red10,
+    background = DarkBlueGray95,
+    onBackground = DarkBlueGray10,
+    surface = DarkBlueGray95,
+    onSurface = DarkBlueGray10,
+    surfaceVariant = BlueGray90,
+    onSurfaceVariant = BlueGray30,
+    inverseSurface = DarkBlueGray30,
+    inverseOnSurface = DarkBlueGray95,
+    outline = BlueGray60
 )
 
 @Composable
