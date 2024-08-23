@@ -14,20 +14,29 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import com.jogasoft.moviefinder.BuildConfig
+import com.jogasoft.moviefinder.R
 import com.jogasoft.moviefinder.data.Movie
 import com.jogasoft.moviefinder.ui.HomeUiState
+import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
+
+// Test tags
+const val HomeLazyColumnTestTag = "HomeLazyColumnTestTag"
 
 @Composable
 fun HomeScreen(
@@ -35,33 +44,36 @@ fun HomeScreen(
     uiState: HomeUiState
 ) {
     LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(horizontal = 8.dp)
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.background)
+            .testTag(HomeLazyColumnTestTag),
+        contentPadding = PaddingValues(vertical = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
             LazyMovieRow(
-                sectionTitle = "Now Playing",
+                sectionTitle = stringResource(R.string.now_playing),
                 movies = uiState.nowPlayingMovies
             )
         }
 
         item {
             LazyMovieRow(
-                sectionTitle = "Popular",
+                sectionTitle = stringResource(R.string.popular),
                 movies = uiState.popularMovies
             )
         }
 
         item {
             LazyMovieRow(
-                sectionTitle = "Top Rated",
+                sectionTitle = stringResource(R.string.top_rated),
                 movies = uiState.topRatedMovies
             )
         }
 
         item {
             LazyMovieRow(
-                sectionTitle = "Upcoming",
+                sectionTitle = stringResource(R.string.upcoming),
                 movies = uiState.upcomingMovies
             )
         }
@@ -75,15 +87,22 @@ private fun LazyMovieRow(
     movies: List<Movie>
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Text(sectionTitle)
+        Text(
+            modifier = Modifier.padding(start = 16.dp),
+            text = sectionTitle,
+            color = MaterialTheme.colorScheme.onBackground,
+            style = MaterialTheme.typography.titleMedium
+        )
 
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 8.dp)
         ) {
             items(
                 items = movies,
@@ -123,8 +142,7 @@ private fun AnimatedPlaceholderMovie() {
     )
 }
 
-
-@Preview
+@PreviewLightDark
 @Composable
 fun PreviewHomeScreen() {
     val movies = List(20) { index ->
@@ -138,10 +156,14 @@ fun PreviewHomeScreen() {
         )
     }
 
-    HomeScreen(
-        uiState = HomeUiState(
-            nowPlayingMovies = movies,
-            popularMovies = movies
+    MovieFinderTheme {
+        HomeScreen(
+            uiState = HomeUiState(
+                nowPlayingMovies = movies,
+                popularMovies = movies,
+                topRatedMovies = movies,
+                upcomingMovies = movies
+            )
         )
-    )
+    }
 }
