@@ -38,17 +38,17 @@ private val DarkColorScheme = darkColorScheme(
 private val LightColorScheme = lightColorScheme(
     primary = Blue40,
     onPrimary = Color.White,
-    primaryContainer = Blue90,
+    primaryContainer = Blue80,
     onPrimaryContainer = Blue10,
     secondary = DarkBlue40,
     onSecondary = Color.White,
-    secondaryContainer = Blue90,
+    secondaryContainer = Blue80,
     onSecondaryContainer = Blue10,
     error = Red40,
     onError = Color.White,
     errorContainer = Red90,
     onErrorContainer = Red10,
-    background = DarkBlueGray95,
+    background = DarkBlueGray99,
     onBackground = DarkBlueGray10,
     surface = DarkBlueGray95,
     onSurface = DarkBlueGray10,
@@ -62,7 +62,6 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun MovieFinderTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {

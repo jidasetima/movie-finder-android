@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -33,6 +35,9 @@ import com.jogasoft.moviefinder.data.Movie
 import com.jogasoft.moviefinder.ui.HomeUiState
 import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
 
+// Test tags
+const val HomeLazyColumnTestTag = "HomeLazyColumnTestTag"
+
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -40,8 +45,9 @@ fun HomeScreen(
 ) {
     LazyColumn(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.background),
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 16.dp),
+            .background(MaterialTheme.colorScheme.background)
+            .testTag(HomeLazyColumnTestTag),
+        contentPadding = PaddingValues(vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
@@ -85,7 +91,7 @@ private fun LazyMovieRow(
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Text(
-            modifier = Modifier,
+            modifier = Modifier.padding(start = 16.dp),
             text = sectionTitle,
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.titleMedium
@@ -95,7 +101,8 @@ private fun LazyMovieRow(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 8.dp)
         ) {
             items(
                 items = movies,
@@ -134,7 +141,6 @@ private fun AnimatedPlaceholderMovie() {
             .background(color)
     )
 }
-
 
 @PreviewLightDark
 @Composable

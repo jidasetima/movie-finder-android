@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieFinder</string>
+    <string name="app_name">Movie Finder</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="now_playing">Now Playing</string>
     <string name="popular">Popular</string>
