@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MovieFinder</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="upcoming">Upcoming</string>
 </resources>
