@@ -9,7 +9,7 @@ data class NetworkMovieDetail(
     @Json(name = "backdrop_path")
     val backdropPath: String,
     @Json(name = "belongs_to_collection")
-    val belongsToCollection: NetworkBelongsToCollection,
+    val belongsToCollection: NetworkBelongsToCollection?,
     val budget: Int,
     val genres: List<NetworkGenre>,
     val homepage: String,
