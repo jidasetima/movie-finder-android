@@ -7,6 +7,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,7 +42,8 @@ const val HomeLazyColumnTestTag = "HomeLazyColumnTestTag"
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    uiState: HomeUiState
+    uiState: HomeUiState,
+    navigateToMovieDetail: (Int) -> Unit
 ) {
     LazyColumn(
         modifier = modifier
@@ -53,28 +55,32 @@ fun HomeScreen(
         item {
             LazyMovieRow(
                 sectionTitle = stringResource(R.string.now_playing),
-                movies = uiState.nowPlayingMovies
+                movies = uiState.nowPlayingMovies,
+                navigateToMovieDetail = navigateToMovieDetail
             )
         }
 
         item {
             LazyMovieRow(
                 sectionTitle = stringResource(R.string.popular),
-                movies = uiState.popularMovies
+                movies = uiState.popularMovies,
+                navigateToMovieDetail = navigateToMovieDetail
             )
         }
 
         item {
             LazyMovieRow(
                 sectionTitle = stringResource(R.string.top_rated),
-                movies = uiState.topRatedMovies
+                movies = uiState.topRatedMovies,
+                navigateToMovieDetail = navigateToMovieDetail
             )
         }
 
         item {
             LazyMovieRow(
                 sectionTitle = stringResource(R.string.upcoming),
-                movies = uiState.upcomingMovies
+                movies = uiState.upcomingMovies,
+                navigateToMovieDetail = navigateToMovieDetail
             )
         }
     }
@@ -84,7 +90,8 @@ fun HomeScreen(
 private fun LazyMovieRow(
     modifier: Modifier = Modifier,
     sectionTitle: String,
-    movies: List<Movie>
+    movies: List<Movie>,
+    navigateToMovieDetail: (Int) -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -109,7 +116,7 @@ private fun LazyMovieRow(
                 key = { movie -> movie.id }
             ) { movie ->
                 SubcomposeAsyncImage(
-                    model = "${BuildConfig.BASE_TMDB_IMAGE_URL}/w400/${movie.posterPath}",
+                    model = "${BuildConfig.BASE_TMDB_IMAGE_URL}/w342/${movie.posterPath}",
                     loading = {
                         AnimatedPlaceholderMovie()
                     },
@@ -117,13 +124,14 @@ private fun LazyMovieRow(
                         AnimatedPlaceholderMovie()
                     },
                     contentDescription = "${movie.title} image",
-                    modifier = Modifier.aspectRatio(2f / 3f)
+                    modifier = Modifier
+                        .aspectRatio(2f / 3f)
+                        .clickable { navigateToMovieDetail(movie.id)}
                 )
             }
         }
     }
 }
-
 
 @Composable
 private fun AnimatedPlaceholderMovie() {
@@ -163,7 +171,8 @@ fun PreviewHomeScreen() {
                 popularMovies = movies,
                 topRatedMovies = movies,
                 upcomingMovies = movies
-            )
+            ),
+            navigateToMovieDetail = {}
         )
     }
 }

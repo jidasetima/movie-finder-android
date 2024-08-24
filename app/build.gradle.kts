@@ -3,8 +3,9 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
 }
 
@@ -73,8 +74,9 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.material)
 
     // Coil
     implementation(libs.coil)
@@ -93,6 +95,10 @@ dependencies {
     // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Retrofit & Moshi
     implementation(libs.retrofit)

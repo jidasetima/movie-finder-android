@@ -2,6 +2,12 @@ package com.jogasoft.moviefinder.data.source.network
 
 import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
 import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkGenre
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkBelongsToCollection
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkProductionCompany
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkProductionCountry
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkSpokenLanguage
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -39,7 +45,63 @@ class DefaultMovieNetworkDataSourceTest {
         totalResults = networkMovies.size
     )
 
-    private val movieApi = FakeMovieApi(networkMoviePage = networkMoviePage)
+    val movieDetailId = 1
+    private val movieDetail = NetworkMovieDetail(
+        id = movieDetailId,
+        adult = false,
+        backdropPath = "Test Path",
+        belongsToCollection = NetworkBelongsToCollection(
+            id = 1,
+            name = "Test Name",
+            posterPath = "Test Path",
+            backdropPath = "Test Path"
+        ),
+        budget = 200000000,
+        genres = listOf(NetworkGenre(id = 1, name = "Action")),
+        homepage = "www.test.com",
+        imdbId = "1",
+        originCountry = listOf("US"),
+        originalLanguage = "en",
+        originalTitle = "Test Title",
+        overview = "Test Overview",
+        popularity = 1.0,
+        posterPath = "Test Path",
+        productionCompanies = listOf(
+            NetworkProductionCompany(
+                id = 1,
+                logoPath = "Test Path",
+                name = "Test Name",
+                originCountry = "US"
+            ),
+        ),
+        productionCountries = listOf(
+            NetworkProductionCountry(
+                iso_3166_1 = "US",
+                name = "United States of America"
+            )
+        ),
+        releaseDate = "2024-07-24",
+        revenue = 100,
+        runtime = 1,
+        spokenLanguages = listOf(
+            NetworkSpokenLanguage(
+                englishName = "English",
+                iso_639_1 = "en",
+                name = "English"
+            )
+        ),
+        status = "Test Status",
+        tagline = "Test TagLine",
+        title = "Test Title",
+        video = false,
+        voteAverage = 1.0,
+        voteCount = 1
+    )
+
+    private val movieApi = FakeMovieApi(
+        networkMoviePage = networkMoviePage,
+        networkMovieDetail = movieDetail
+    )
 
     private val movieNetworkDataSource = DefaultMovieNetworkDataSource(movieApi = movieApi)
 
@@ -145,6 +207,30 @@ class DefaultMovieNetworkDataSourceTest {
         assertFailsWith<CancellationException>(
             block = {
                 movieNetworkDataSource.getUpcomingMovies()
+            }
+        )
+    }
+
+    @Test
+    fun `getMovieDetailById returns success with expected result`() = runTest {
+        val response = movieNetworkDataSource.getMovieDetailById(movieDetailId)
+        assertTrue(response.isSuccess)
+        assertEquals(movieDetail, response.getOrNull())
+    }
+
+    @Test
+    fun `getMovieDetailById returns failure with expected result`() = runTest {
+        movieApi.shouldReturnErrorResponse = true
+        val response = movieNetworkDataSource.getMovieDetailById(movieDetailId)
+        assertTrue(response.isFailure)
+    }
+
+    @Test
+    fun `getMovieDetailById throws CancellationException when cancelled`() = runTest {
+        movieApi.shouldThrowCancellationException = true
+        assertFailsWith<CancellationException>(
+            block = {
+                movieNetworkDataSource.getMovieDetailById(movieDetailId)
             }
         )
     }

@@ -5,4 +5,5 @@ interface MovieRepository {
     suspend fun getPopularMovies(): Result<List<Movie>>
     suspend fun getTopRatedMovies(): Result<List<Movie>>
     suspend fun getUpcomingMovies(): Result<List<Movie>>
+    suspend fun getMovieDetailById(movieId: Int): Result<MovieDetail>
 }

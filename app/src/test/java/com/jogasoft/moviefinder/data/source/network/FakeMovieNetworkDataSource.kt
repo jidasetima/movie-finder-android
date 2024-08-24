@@ -1,9 +1,11 @@
 package com.jogasoft.moviefinder.data.source.network
 
 import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
 
 class FakeMovieNetworkDataSource(
-    private val networkMovies: List<NetworkMovie>
+    private val networkMovies: List<NetworkMovie>,
+    private val networkMovieDetail: NetworkMovieDetail
 ): MovieNetworkDataSource {
     var shouldReturnFailureResult = false
 
@@ -32,6 +34,13 @@ class FakeMovieNetworkDataSource(
         return when {
             shouldReturnFailureResult -> Result.failure(Exception())
             else -> Result.success(networkMovies)
+        }
+    }
+
+    override suspend fun getMovieDetailById(movieId: Int): Result<NetworkMovieDetail> {
+        return when {
+            networkMovieDetail.id == movieId -> Result.success(networkMovieDetail)
+            else -> Result.failure(Exception())
         }
     }
 }

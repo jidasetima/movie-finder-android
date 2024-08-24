@@ -10,20 +10,24 @@ espressoCore = "3.6.1"
 # making version compability very brittle.
 hilt = "2.51"
 hiltCompiler = "2.51"
+hiltNavigation = "1.0.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.0.0"
+kotlinSerialization = "1.7.1"
 ksp = "2.0.0-1.0.21"
 lifecycleRuntimeKtx = "2.8.4"
 lifecycleViewmodelCompose = "2.8.4"
 material = "1.12.0"
 moshi = "1.13.0"
+navigation = "2.8.0-rc01"
 retrofit = "2.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization"}
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 # Coil
@@ -45,6 +49,11 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltCompiler"}
 
+
+#Navigation
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation"}
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation"}
+
 # Retrofit & Moshi
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
@@ -63,6 +72,7 @@ kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin"}
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
