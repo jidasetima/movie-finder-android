@@ -22,7 +22,10 @@ data class MovieDetailScreen(val movieId: Int)
 fun MovieFinderAppNavigationHost() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = HomeScreen) {
+    NavHost(
+        navController = navController,
+        startDestination = HomeScreen,
+    ) {
         composable<HomeScreen> {
             val viewModel = hiltViewModel<HomeViewModel>()
             HomeScreen(
@@ -35,7 +38,10 @@ fun MovieFinderAppNavigationHost() {
 
         composable<MovieDetailScreen> {
             val viewModel = hiltViewModel<MovieDetailViewModel>()
-            MovieDetailScreen(uiState = viewModel.uiState.collectAsStateWithLifecycle().value)
+            MovieDetailScreen(
+                uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
+                navigateBackAction = { navController.popBackStack() }
+            )
         }
     }
 }

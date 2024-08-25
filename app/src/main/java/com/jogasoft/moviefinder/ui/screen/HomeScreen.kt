@@ -20,6 +20,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,6 +35,7 @@ import com.jogasoft.moviefinder.BuildConfig
 import com.jogasoft.moviefinder.R
 import com.jogasoft.moviefinder.data.Movie
 import com.jogasoft.moviefinder.ui.HomeUiState
+import com.jogasoft.moviefinder.ui.component.MovieFinderAppBar
 import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
 
 // Test tags
@@ -45,43 +47,49 @@ fun HomeScreen(
     uiState: HomeUiState,
     navigateToMovieDetail: (Int) -> Unit
 ) {
-    LazyColumn(
-        modifier = modifier
-            .background(MaterialTheme.colorScheme.background)
-            .testTag(HomeLazyColumnTestTag),
-        contentPadding = PaddingValues(vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        item {
-            LazyMovieRow(
-                sectionTitle = stringResource(R.string.now_playing),
-                movies = uiState.nowPlayingMovies,
-                navigateToMovieDetail = navigateToMovieDetail
-            )
-        }
+    Scaffold(
+        modifier = modifier,
+        topBar = { MovieFinderAppBar() }
+    ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier
+                .padding(paddingValues)
+                .background(MaterialTheme.colorScheme.background)
+                .testTag(HomeLazyColumnTestTag),
+            contentPadding = PaddingValues(vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            item {
+                LazyMovieRow(
+                    sectionTitle = stringResource(R.string.now_playing),
+                    movies = uiState.nowPlayingMovies,
+                    navigateToMovieDetail = navigateToMovieDetail
+                )
+            }
 
-        item {
-            LazyMovieRow(
-                sectionTitle = stringResource(R.string.popular),
-                movies = uiState.popularMovies,
-                navigateToMovieDetail = navigateToMovieDetail
-            )
-        }
+            item {
+                LazyMovieRow(
+                    sectionTitle = stringResource(R.string.popular),
+                    movies = uiState.popularMovies,
+                    navigateToMovieDetail = navigateToMovieDetail
+                )
+            }
 
-        item {
-            LazyMovieRow(
-                sectionTitle = stringResource(R.string.top_rated),
-                movies = uiState.topRatedMovies,
-                navigateToMovieDetail = navigateToMovieDetail
-            )
-        }
+            item {
+                LazyMovieRow(
+                    sectionTitle = stringResource(R.string.top_rated),
+                    movies = uiState.topRatedMovies,
+                    navigateToMovieDetail = navigateToMovieDetail
+                )
+            }
 
-        item {
-            LazyMovieRow(
-                sectionTitle = stringResource(R.string.upcoming),
-                movies = uiState.upcomingMovies,
-                navigateToMovieDetail = navigateToMovieDetail
-            )
+            item {
+                LazyMovieRow(
+                    sectionTitle = stringResource(R.string.upcoming),
+                    movies = uiState.upcomingMovies,
+                    navigateToMovieDetail = navigateToMovieDetail
+                )
+            }
         }
     }
 }
@@ -126,7 +134,7 @@ private fun LazyMovieRow(
                     contentDescription = "${movie.title} image",
                     modifier = Modifier
                         .aspectRatio(2f / 3f)
-                        .clickable { navigateToMovieDetail(movie.id)}
+                        .clickable { navigateToMovieDetail(movie.id) }
                 )
             }
         }
