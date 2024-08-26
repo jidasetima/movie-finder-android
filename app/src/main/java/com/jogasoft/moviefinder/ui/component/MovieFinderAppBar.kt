@@ -11,10 +11,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.jogasoft.moviefinder.R
 import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
+
+//Test tags
+const val AppBarBackButtonTestTag = "AppBarBackButtonTestTag"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,7 +39,10 @@ fun MovieFinderAppBar(
         ),
         navigationIcon = {
             navigateBackAction?.let {
-                IconButton(onClick = { navigateBackAction() }) {
+                IconButton(
+                    modifier = Modifier.testTag(AppBarBackButtonTestTag),
+                    onClick = { navigateBackAction() }
+                ) {
                     Icon(imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Navigation Back Arrow"
                     )

@@ -34,6 +34,7 @@ class MovieDetailViewModelTest{
         id = movieDetailId,
         backdropPath = "Fake Path",
         budget = 1,
+        genres = listOf(),
         overview = "Fake Overview",
         popularity = 1.0,
         posterPath = "Fake Path",

@@ -12,7 +12,7 @@ import com.jogasoft.moviefinder.ui.HomeUiState
 import org.junit.Rule
 import org.junit.Test
 
-class HomeScreenScreenTest {
+class HomeScreenTest {
     @get:Rule
     val rule = createAndroidComposeRule<ComponentActivity>()
 

@@ -49,6 +49,7 @@ fun NetworkMovieDetail.toMovieDetail() = MovieDetail(
     id = this.id,
     backdropPath = this.backdropPath,
     budget = this.budget,
+    genres = this.genres.map { it.name },
     overview = this.overview,
     popularity = this.popularity,
     posterPath = this.posterPath,
