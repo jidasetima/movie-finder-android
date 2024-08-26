@@ -27,7 +27,7 @@ android {
         versionCode = 7
         versionName = "0.0.7"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.jogasoft.moviefinder.MovieFinderHiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -110,10 +110,13 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.coroutine.test)
     testImplementation(libs.kotlin.test)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.hilt.testing)
+    kspAndroidTest(libs.hilt.compiler)
 
     // Debug
     debugImplementation(libs.androidx.ui.tooling)

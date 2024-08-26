@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import com.jogasoft.moviefinder.ui.navigation.MovieFinderAppNavigationHost
 import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +24,8 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.background)
                 ) {
-                    MovieFinderAppNavigationHost()
+                    val navController = rememberNavController()
+                    MovieFinderAppNavigationHost(navController)
                 }
             }
         }
