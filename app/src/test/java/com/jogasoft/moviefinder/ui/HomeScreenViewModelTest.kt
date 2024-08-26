@@ -2,6 +2,7 @@ package com.jogasoft.moviefinder.ui
 
 import com.jogasoft.moviefinder.data.FakeMovieRepository
 import com.jogasoft.moviefinder.data.Movie
+import com.jogasoft.moviefinder.data.MovieDetail
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -14,7 +15,7 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class HomeViewModelTest {
+class HomeScreenViewModelTest {
     private val movies = List(20) { index: Int ->
         Movie(
             id = index,
@@ -26,7 +27,21 @@ class HomeViewModelTest {
         )
     }
 
-    private val movieRepository = FakeMovieRepository(movies = movies)
+    private val movieDetail = MovieDetail(
+        id = 1,
+        backdropPath = "Fake Path",
+        budget = 1,
+        genres = listOf(),
+        overview = "Fake Overview",
+        popularity = 1.0,
+        posterPath = "Fake Path",
+        releaseDate = "Fake Date",
+        runtime = 1,
+        tagline = "Fake Tagline",
+        title = "Fake Title"
+    )
+
+    private val movieRepository = FakeMovieRepository(movies = movies, movieDetail = movieDetail)
     private lateinit var homeViewModel: HomeViewModel
 
     @Before
@@ -52,22 +67,22 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `initializes uiState with now playing movies on ViewModel init`() = runTest {
+    fun `updates uiState with now playing movies on ViewModel init`() = runTest {
         assertEquals(movies, homeViewModel.uiState.value.nowPlayingMovies)
     }
 
     @Test
-    fun `initializes uiState with popular movies on ViewModel init`() = runTest {
+    fun `updates uiState with popular movies on ViewModel init`() = runTest {
         assertEquals(movies, homeViewModel.uiState.value.popularMovies)
     }
 
     @Test
-    fun `initializes uiState with top rated on ViewModel init`() = runTest {
+    fun `updates uiState with top rated movies on ViewModel init`() = runTest {
         assertEquals(movies, homeViewModel.uiState.value.topRatedMovies)
     }
 
     @Test
-    fun `initializes uiState with upcoming on ViewModel init`() = runTest {
+    fun `updates uiState with upcoming movies on ViewModel init`() = runTest {
         assertEquals(movies, homeViewModel.uiState.value.upcomingMovies)
     }
 }
