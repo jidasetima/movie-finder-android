@@ -58,4 +58,3 @@ fun NetworkMovieDetail.toMovieDetail() = MovieDetail(
     tagline = this.tagline,
     title = this.title
 )
-

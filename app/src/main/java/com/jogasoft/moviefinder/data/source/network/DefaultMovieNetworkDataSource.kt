@@ -51,7 +51,7 @@ class DefaultMovieNetworkDataSource @Inject constructor(
             Log.e(TAG, "Get Movie detail for id: $movieId operation was canceled", e)
             throw e
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to get Movie Detail By Id $movieId")
+            Log.e(TAG, "Failed to get Movie Detail By Id $movieId", e)
             Result.failure(e)
         }
     }
