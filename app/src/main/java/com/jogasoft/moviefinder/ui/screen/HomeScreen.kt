@@ -34,6 +34,7 @@ import coil.compose.SubcomposeAsyncImage
 import com.jogasoft.moviefinder.BuildConfig
 import com.jogasoft.moviefinder.R
 import com.jogasoft.moviefinder.data.Movie
+import com.jogasoft.moviefinder.data.MovieCategory
 import com.jogasoft.moviefinder.ui.HomeUiState
 import com.jogasoft.moviefinder.ui.component.MovieFinderAppBar
 import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
@@ -161,24 +162,62 @@ private fun AnimatedPlaceholderMovie() {
 @PreviewLightDark
 @Composable
 fun PreviewHomeScreen() {
-    val movies = List(20) { index ->
+    
+    val nowPlayingMovies = List(20) { index ->
         Movie(
             id = index,
             backdropPath = "/backdrop1.jpg",
             overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
             posterPath = "/poster1.jpg",
             releaseDate = "2023-07-15",
-            title = "The Hidden Depths"
+            title = "The Hidden Depths",
+            category = MovieCategory.NOW_PLAYING
+        )
+    }
+
+    val popularMovies = List(20) { index ->
+        Movie(
+            id = index,
+            backdropPath = "/backdrop1.jpg",
+            overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
+            posterPath = "/poster1.jpg",
+            releaseDate = "2023-07-15",
+            title = "The Hidden Depths",
+            category = MovieCategory.POPULAR
+        )
+    }
+
+    val topRatedMovies = List(20) { index ->
+        Movie(
+            id = index,
+            backdropPath = "/backdrop1.jpg",
+            overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
+            posterPath = "/poster1.jpg",
+            releaseDate = "2023-07-15",
+            title = "The Hidden Depths",
+            category = MovieCategory.TOP_RATED
+        )
+    }
+
+    val upcomingMovies = List(20) { index ->
+        Movie(
+            id = index,
+            backdropPath = "/backdrop1.jpg",
+            overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
+            posterPath = "/poster1.jpg",
+            releaseDate = "2023-07-15",
+            title = "The Hidden Depths",
+            category = MovieCategory.UPCOMING
         )
     }
 
     MovieFinderTheme {
         HomeScreen(
             uiState = HomeUiState(
-                nowPlayingMovies = movies,
-                popularMovies = movies,
-                topRatedMovies = movies,
-                upcomingMovies = movies
+                nowPlayingMovies = nowPlayingMovies,
+                popularMovies = popularMovies,
+                topRatedMovies = topRatedMovies,
+                upcomingMovies = upcomingMovies
             ),
             navigateToMovieDetail = {}
         )

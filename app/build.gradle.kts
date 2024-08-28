@@ -106,6 +106,11 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
 
+    // Room
+    implementation(libs.room)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.coroutine.test)

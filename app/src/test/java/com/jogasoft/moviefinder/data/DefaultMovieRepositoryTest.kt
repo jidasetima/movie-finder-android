@@ -1,8 +1,8 @@
 package com.jogasoft.moviefinder.data
 
+import com.jogasoft.moviefinder.data.source.local.FakeMovieDao
 import com.jogasoft.moviefinder.data.source.network.FakeMovieNetworkDataSource
 import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
-import com.jogasoft.moviefinder.data.source.network.model.movie.toMovies
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkGenre
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkBelongsToCollection
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
@@ -94,61 +94,66 @@ class DefaultMovieRepositoryTest {
         networkMovieDetail = movieDetail
     )
 
-    private val movieRepository = DefaultMovieRepository(movieNetworkDataSource = movieNetworkDataSource)
+    private val movieDao = FakeMovieDao()
+
+    private val movieRepository = DefaultMovieRepository(
+        movieNetworkDataSource = movieNetworkDataSource,
+        movieDao = movieDao
+    )
 
     @Test
-    fun `getNowPlayingMovies returns success with expected result`() = runTest {
-        val response = movieRepository.getNowPlayingMovies()
+    fun synchronizeNowPlayingMovies_returnsSuccess_withExpectedResult() = runTest {
+        val response = movieRepository.synchronizeNowPlayingMovies()
         assertTrue(response.isSuccess)
-        assertEquals(networkMovies.toMovies(), response.getOrNull())
+        assertEquals(Unit, response.getOrNull())
     }
 
     @Test
-    fun `getNowPlayingMovies returns failure with expected result`() = runTest {
+    fun synchronizeNowPlayingMovies_returnsFailure_withExpectedResult() = runTest {
         movieNetworkDataSource.shouldReturnFailureResult = true
-        val response = movieRepository.getNowPlayingMovies()
+        val response = movieRepository.synchronizeNowPlayingMovies()
         assertTrue(response.isFailure)
     }
 
     @Test
-    fun `getPopularMovies returns success with expected result`() = runTest {
-        val response = movieRepository.getPopularMovies()
+    fun synchronizePopularMovies_returnsSuccess_withExpectedResult() = runTest {
+        val response = movieRepository.synchronizePopularMovies()
         assertTrue(response.isSuccess)
-        assertEquals(networkMovies.toMovies(), response.getOrNull())
+        assertEquals(Unit, response.getOrNull())
     }
 
     @Test
-    fun `getPopularMovies returns failure with expected result`() = runTest {
+    fun synchronizePopularMovies_returnsFailure_withExpectedResult() = runTest {
         movieNetworkDataSource.shouldReturnFailureResult = true
-        val response = movieRepository.getPopularMovies()
+        val response = movieRepository.synchronizePopularMovies()
         assertTrue(response.isFailure)
     }
 
     @Test
-    fun `getTopRatedMovies returns success with expected result`() = runTest {
-        val response = movieRepository.getTopRatedMovies()
+    fun synchronizeTopRatedMovies_returnsSuccess_withExpectedResult() = runTest {
+        val response = movieRepository.synchronizeTopRatedMovies()
         assertTrue(response.isSuccess)
-        assertEquals(networkMovies.toMovies(), response.getOrNull())
+        assertEquals(Unit, response.getOrNull())
     }
 
     @Test
-    fun `getTopRatedMovies returns failure with expected result`() = runTest {
+    fun synchronizeTopRatedMovies_returnsFailure_withExpectedResult() = runTest {
         movieNetworkDataSource.shouldReturnFailureResult = true
-        val response = movieRepository.getTopRatedMovies()
+        val response = movieRepository.synchronizeTopRatedMovies()
         assertTrue(response.isFailure)
     }
 
     @Test
-    fun `getUpcomingMovies returns success with expected result`() = runTest {
-        val response = movieRepository.getUpcomingMovies()
+    fun synchronizeUpcomingMovies_returnsSuccess_withExpectedResult() = runTest {
+        val response = movieRepository.synchronizeUpcomingMovies()
         assertTrue(response.isSuccess)
-        assertEquals(networkMovies.toMovies(), response.getOrNull())
+        assertEquals(Unit, response.getOrNull())
     }
 
     @Test
-    fun `getUpcomingMovies returns failure with expected result`() = runTest {
+    fun synchronizeUpcomingMovies_returnsFailure_withExpectedResult() = runTest {
         movieNetworkDataSource.shouldReturnFailureResult = true
-        val response = movieRepository.getUpcomingMovies()
+        val response = movieRepository.synchronizeUpcomingMovies()
         assertTrue(response.isFailure)
     }
 

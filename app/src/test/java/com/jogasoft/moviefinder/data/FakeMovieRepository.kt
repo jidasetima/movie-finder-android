@@ -1,12 +1,19 @@
 package com.jogasoft.moviefinder.data
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+
 class FakeMovieRepository(
-    private val movies: List<Movie>,
     private val movieDetail: MovieDetail
 ): MovieRepository {
-    override suspend fun getNowPlayingMovies(): Result<List<Movie>> = Result.success(movies)
-    override suspend fun getPopularMovies(): Result<List<Movie>> = Result.success(movies)
-    override suspend fun getTopRatedMovies(): Result<List<Movie>> = Result.success(movies)
-    override suspend fun getUpcomingMovies(): Result<List<Movie>> = Result.success(movies)
+    private val _movies = MutableSharedFlow<List<Movie>>()
+    suspend fun emit(movies: List<Movie>) = _movies.emit(movies)
+    override fun observeMovies(): Flow<List<Movie>> = _movies
+
+    override suspend fun synchronizeNowPlayingMovies(): Result<Unit> = Result.success(Unit)
+    override suspend fun synchronizePopularMovies(): Result<Unit> = Result.success(Unit)
+    override suspend fun synchronizeTopRatedMovies(): Result<Unit> = Result.success(Unit)
+    override suspend fun synchronizeUpcomingMovies(): Result<Unit> = Result.success(Unit)
+
     override suspend fun getMovieDetailById(movieId: Int): Result<MovieDetail>  = Result.success(movieDetail)
 }
