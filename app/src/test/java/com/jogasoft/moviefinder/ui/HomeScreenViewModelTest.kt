@@ -2,28 +2,34 @@ package com.jogasoft.moviefinder.ui
 
 import com.jogasoft.moviefinder.data.FakeMovieRepository
 import com.jogasoft.moviefinder.data.Movie
+import com.jogasoft.moviefinder.data.MovieCategory
 import com.jogasoft.moviefinder.data.MovieDetail
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeScreenViewModelTest {
-    private val movies = List(20) { index: Int ->
+    private val movies = MovieCategory.entries.mapIndexed { index, category ->
         Movie(
             id = index,
             backdropPath = "/backdrop1.jpg",
             overview = "Fake Overview",
             posterPath = "/poster1.jpg",
             releaseDate = "2023-07-15",
-            title = "Fake title"
+            title = "Fake title",
+            category = category
         )
     }
 
@@ -41,7 +47,7 @@ class HomeScreenViewModelTest {
         title = "Fake Title"
     )
 
-    private val movieRepository = FakeMovieRepository(movies = movies, movieDetail = movieDetail)
+    private val movieRepository = FakeMovieRepository(movieDetail = movieDetail)
     private lateinit var homeViewModel: HomeViewModel
 
     @Before
@@ -57,7 +63,7 @@ class HomeScreenViewModelTest {
     }
 
     @Test
-    fun `HomeUiState initializes with correct default values`() {
+    fun initializes_homeUiState_with_correct_values() {
         val homeUiState = HomeUiState()
 
         assertEquals(listOf<Movie>(), homeUiState.nowPlayingMovies)
@@ -67,22 +73,76 @@ class HomeScreenViewModelTest {
     }
 
     @Test
-    fun `updates uiState with now playing movies on ViewModel init`() = runTest {
-        assertEquals(movies, homeViewModel.uiState.value.nowPlayingMovies)
+    fun updates_uiState_nowPlayingMovies_correctly() = runTest {
+        assertEquals(listOf<Movie>(), homeViewModel.uiState.value.nowPlayingMovies)
+        val testJob = launch {
+            homeViewModel.uiState.collect()
+        }
+
+        advanceUntilIdle()
+        movieRepository.emit(movies)
+
+        assertEquals(
+            movies.filter { it.category == MovieCategory.NOW_PLAYING },
+            homeViewModel.uiState.value.nowPlayingMovies
+        )
+
+        testJob.cancel()
+        assertTrue(testJob.isCancelled)
     }
 
     @Test
-    fun `updates uiState with popular movies on ViewModel init`() = runTest {
-        assertEquals(movies, homeViewModel.uiState.value.popularMovies)
+    fun updates_uiState_popularMovies_correctly() = runTest {
+        assertEquals(listOf<Movie>(), homeViewModel.uiState.value.popularMovies)
+        val testJob = launch {
+            homeViewModel.uiState.collect()
+        }
+
+        advanceUntilIdle()
+        movieRepository.emit(movies)
+        assertEquals(
+            movies.filter { it.category == MovieCategory.POPULAR },
+            homeViewModel.uiState.value.popularMovies
+        )
+
+        testJob.cancel()
+        assertTrue(testJob.isCancelled)
     }
 
     @Test
-    fun `updates uiState with top rated movies on ViewModel init`() = runTest {
-        assertEquals(movies, homeViewModel.uiState.value.topRatedMovies)
+    fun updates_uiState_topRatedMovies_correctly() = runTest {
+        assertEquals(listOf<Movie>(), homeViewModel.uiState.value.topRatedMovies)
+        val testJob = launch {
+            homeViewModel.uiState.collect()
+        }
+
+        advanceUntilIdle()
+        movieRepository.emit(movies)
+
+        assertEquals(
+            movies.filter { it.category == MovieCategory.TOP_RATED },
+            homeViewModel.uiState.value.topRatedMovies
+        )
+
+        testJob.cancel()
+        assertTrue(testJob.isCancelled)
     }
 
     @Test
-    fun `updates uiState with upcoming movies on ViewModel init`() = runTest {
-        assertEquals(movies, homeViewModel.uiState.value.upcomingMovies)
+    fun updates_uiState_upcomingMovies_correctly() = runTest {
+        assertEquals(listOf<Movie>(), homeViewModel.uiState.value.upcomingMovies)
+        val testJob = launch {
+            homeViewModel.uiState.collect()
+        }
+
+        advanceUntilIdle()
+        movieRepository.emit(movies)
+        assertEquals(
+            movies.filter { it.category == MovieCategory.UPCOMING },
+            homeViewModel.uiState.value.upcomingMovies
+        )
+
+        testJob.cancel()
+        assertTrue(testJob.isCancelled)
     }
 }

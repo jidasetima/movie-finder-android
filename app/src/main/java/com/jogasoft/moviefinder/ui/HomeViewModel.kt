@@ -3,11 +3,13 @@ package com.jogasoft.moviefinder.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jogasoft.moviefinder.data.Movie
+import com.jogasoft.moviefinder.data.MovieCategory
 import com.jogasoft.moviefinder.data.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,8 +17,21 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState = _uiState.asStateFlow()
+    val uiState: StateFlow<HomeUiState> = movieRepository.observeMovies()
+        .map { movies ->
+            val groupedMovies = movies.groupBy { it.category }
+            HomeUiState(
+                nowPlayingMovies = groupedMovies[MovieCategory.NOW_PLAYING].orEmpty(),
+                popularMovies = groupedMovies[MovieCategory.POPULAR].orEmpty(),
+                topRatedMovies = groupedMovies[MovieCategory.TOP_RATED].orEmpty(),
+                upcomingMovies = groupedMovies[MovieCategory.UPCOMING].orEmpty()
+            )
+        }
+        .stateIn(
+            scope = viewModelScope,
+            initialValue = HomeUiState(),
+            started = SharingStarted.WhileSubscribed(5_000)
+        )
 
     init {
         getNowPlayingMovieList()
@@ -27,31 +42,20 @@ class HomeViewModel @Inject constructor(
 
     private fun getNowPlayingMovieList() {
         viewModelScope.launch {
-            movieRepository.getNowPlayingMovies().fold(
-                onSuccess = { movieList ->
-                    _uiState.update {
-                        it.copy(
-                            nowPlayingMovies = movieList
-                        )
+            movieRepository.synchronizeNowPlayingMovies()
+                .fold(
+                    onSuccess = {},
+                    onFailure = {
+                        //todo: show error state
                     }
-                },
-                onFailure = {
-                    //todo: show error state
-                }
-            )
+                )
         }
     }
 
     private fun getPopularMovieList() {
         viewModelScope.launch {
-            movieRepository.getPopularMovies().fold(
-                onSuccess = { movieList ->
-                    _uiState.update {
-                        it.copy(
-                            popularMovies = movieList
-                        )
-                    }
-                },
+            movieRepository.synchronizePopularMovies().fold(
+                onSuccess = {},
                 onFailure = {
                     //todo: show error state
                 }
@@ -61,14 +65,8 @@ class HomeViewModel @Inject constructor(
 
     private fun getTopRatedMovieList() {
         viewModelScope.launch {
-            movieRepository.getTopRatedMovies().fold(
-                onSuccess = { movieList ->
-                    _uiState.update {
-                        it.copy(
-                            topRatedMovies = movieList
-                        )
-                    }
-                },
+            movieRepository.synchronizeTopRatedMovies().fold(
+                onSuccess = {},
                 onFailure = {
                     //todo: show error state
                 }
@@ -78,14 +76,8 @@ class HomeViewModel @Inject constructor(
 
     private fun getUpcomingMovieList() {
         viewModelScope.launch {
-            movieRepository.getUpcomingMovies().fold(
-                onSuccess = { movieList ->
-                    _uiState.update {
-                        it.copy(
-                            upcomingMovies = movieList
-                        )
-                    }
-                },
+            movieRepository.synchronizeUpcomingMovies().fold(
+                onSuccess = {},
                 onFailure = {
                     //todo: show error state
                 }

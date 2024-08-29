@@ -1,14 +1,21 @@
+
 # Movie Finder Android App
 
 This application is a sandbox environment designed to experiment with and test some of the latest Android features and best practices. The app utilizes the [The Movie Database (TMDb) API](https://api.themoviedb.org/) to fetch and display movie data.
 
 ## Features
-- Fetches and Displays posters of latest movies from the following https://api.themoviedb.org/ categories
-  - Now Playing
-  - Popular
-  - Top Rated
-  - Upcoming
-- Upcoming: tbd
+- Movie Categories
+  - Fetches and Displays posters of latest movies from the following TMDB categories
+    - Now Playing
+    - Popular
+    - Top Rated
+    - Upcoming
+- Movie Details
+  -  Get more detailed information about a movie by selecting it from any category list.
+- Offline Support
+  - Allows viewing of previously stored movie categories even when offline.
+- Future Enhancements
+  - To be determined (TBD).
 
 ## Requirements
 - **Minimum SDK:** 24 (Android 7.0 Nougat)

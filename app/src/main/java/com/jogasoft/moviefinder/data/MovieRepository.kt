@@ -1,9 +1,12 @@
 package com.jogasoft.moviefinder.data
 
+import kotlinx.coroutines.flow.Flow
+
 interface MovieRepository {
-    suspend fun getNowPlayingMovies(): Result<List<Movie>>
-    suspend fun getPopularMovies(): Result<List<Movie>>
-    suspend fun getTopRatedMovies(): Result<List<Movie>>
-    suspend fun getUpcomingMovies(): Result<List<Movie>>
+    fun observeMovies(): Flow<List<Movie>>
+    suspend fun synchronizeNowPlayingMovies(): Result<Unit>
+    suspend fun synchronizePopularMovies(): Result<Unit>
+    suspend fun synchronizeTopRatedMovies(): Result<Unit>
+    suspend fun synchronizeUpcomingMovies(): Result<Unit>
     suspend fun getMovieDetailById(movieId: Int): Result<MovieDetail>
 }

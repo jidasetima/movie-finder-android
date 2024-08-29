@@ -1,6 +1,7 @@
 package com.jogasoft.moviefinder.data.source.network.model.movie
 
-import com.jogasoft.moviefinder.data.Movie
+import com.jogasoft.moviefinder.data.MovieCategory
+import com.jogasoft.moviefinder.data.source.local.LocalMovie
 import com.squareup.moshi.Json
 
 data class NetworkMovie(
@@ -29,15 +30,16 @@ data class NetworkMovie(
 )
 
 //Mappers
-fun NetworkMovie.toMovie(): Movie {
-    return Movie(
-        id = id,
+fun NetworkMovie.toLocalMovie(category: MovieCategory): LocalMovie {
+    return LocalMovie(
+        id = this.id,
         backdropPath = backdropPath,
         overview = overview,
         posterPath = posterPath,
         releaseDate = releaseDate,
-        title = title
+        title = title,
+        category = category
     )
 }
 
-fun List<NetworkMovie>.toMovies() = map(NetworkMovie::toMovie)
+fun List<NetworkMovie>.toLocalMovies(category: MovieCategory) = map { it.toLocalMovie(category) }

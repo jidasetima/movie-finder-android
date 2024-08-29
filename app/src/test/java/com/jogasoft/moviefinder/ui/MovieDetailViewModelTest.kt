@@ -2,7 +2,6 @@ package com.jogasoft.moviefinder.ui
 
 import androidx.lifecycle.SavedStateHandle
 import com.jogasoft.moviefinder.data.FakeMovieRepository
-import com.jogasoft.moviefinder.data.Movie
 import com.jogasoft.moviefinder.data.MovieDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,17 +17,6 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class MovieDetailViewModelTest{
-    private val movies = List(20) { index: Int ->
-        Movie(
-            id = index,
-            backdropPath = "/backdrop1.jpg",
-            overview = "Fake Overview",
-            posterPath = "/poster1.jpg",
-            releaseDate = "2023-07-15",
-            title = "Fake title"
-        )
-    }
-
     private val movieDetailId = 1
     private val movieDetail = MovieDetail(
         id = movieDetailId,
@@ -45,7 +33,7 @@ class MovieDetailViewModelTest{
     )
 
     private val savedStateHandle = SavedStateHandle(mapOf("movieId" to movieDetailId))
-    private val movieRepository = FakeMovieRepository(movies = movies, movieDetail = movieDetail)
+    private val movieRepository = FakeMovieRepository(movieDetail = movieDetail)
 
     private lateinit var movieDetailViewModel: MovieDetailViewModel
 
