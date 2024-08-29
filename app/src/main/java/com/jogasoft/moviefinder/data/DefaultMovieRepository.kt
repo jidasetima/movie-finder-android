@@ -19,7 +19,10 @@ class DefaultMovieRepository @Inject constructor(
         return movieNetworkDataSource.getNowPlayingMovies().fold(
             onSuccess = {
                 val movies = it.toLocalMovies(MovieCategory.NOW_PLAYING)
-                movieDao.upsertAll(*movies.toTypedArray())
+                movieDao.clearAndInsertMoviesByCategory(
+                    movies = movies.toTypedArray(),
+                    category = MovieCategory.NOW_PLAYING
+                )
                 Result.success(Unit)
             },
             onFailure = { Result.failure(it) }
@@ -30,7 +33,10 @@ class DefaultMovieRepository @Inject constructor(
         return movieNetworkDataSource.getPopularMovies().fold(
             onSuccess = {
                 val movies = it.toLocalMovies(MovieCategory.POPULAR)
-                movieDao.upsertAll(*movies.toTypedArray())
+                movieDao.clearAndInsertMoviesByCategory(
+                    movies = movies.toTypedArray(),
+                    category = MovieCategory.POPULAR
+                )
                 Result.success(Unit)
             },
             onFailure = { Result.failure(it) }
@@ -41,7 +47,10 @@ class DefaultMovieRepository @Inject constructor(
         return movieNetworkDataSource.getTopRatedMovies().fold(
             onSuccess = {
                 val movies = it.toLocalMovies(MovieCategory.TOP_RATED)
-                movieDao.upsertAll(*movies.toTypedArray())
+                movieDao.clearAndInsertMoviesByCategory(
+                    movies = movies.toTypedArray(),
+                    category = MovieCategory.TOP_RATED
+                )
                 Result.success(Unit)
             },
             onFailure = { Result.failure(it) }
@@ -52,7 +61,10 @@ class DefaultMovieRepository @Inject constructor(
         return movieNetworkDataSource.getUpcomingMovies().fold(
             onSuccess = {
                 val movies = it.toLocalMovies(MovieCategory.UPCOMING)
-                movieDao.upsertAll(*movies.toTypedArray())
+                movieDao.clearAndInsertMoviesByCategory(
+                    movies = movies.toTypedArray(),
+                    category = MovieCategory.UPCOMING
+                )
                 Result.success(Unit)
             },
             onFailure = { Result.failure(it) }

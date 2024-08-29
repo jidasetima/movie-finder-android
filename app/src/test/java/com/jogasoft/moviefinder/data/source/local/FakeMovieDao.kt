@@ -1,10 +1,11 @@
 package com.jogasoft.moviefinder.data.source.local
 
+import com.jogasoft.moviefinder.data.MovieCategory
 import com.jogasoft.moviefinder.data.source.local.database.MovieDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class FakeMovieDao: MovieDao {
+class FakeMovieDao: MovieDao() {
     private val localMovies = mutableListOf<LocalMovie>()
     override fun observeMovies(): Flow<List<LocalMovie>> = flowOf(localMovies)
 
@@ -18,5 +19,14 @@ class FakeMovieDao: MovieDao {
                 localMovies[index] = movie
             }
         }
+    }
+
+    override fun deleteMovieByCategory(category: MovieCategory) {
+        localMovies.removeIf { it.category == category }
+    }
+
+    override suspend fun clearAndInsertMoviesByCategory(vararg movies: LocalMovie, category: MovieCategory) {
+        deleteMovieByCategory(category)
+        upsertAll(*movies)
     }
 }
