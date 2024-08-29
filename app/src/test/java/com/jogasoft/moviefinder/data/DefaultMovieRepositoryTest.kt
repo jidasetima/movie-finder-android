@@ -12,12 +12,13 @@ import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkSpo
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.toMovieDetail
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import kotlin.random.Random
 
 class DefaultMovieRepositoryTest {
-    private val networkMovies = List(20) { index ->
+    private val networkMovies = List(10) { index ->
         NetworkMovie(
             id = index,
             adult = Random.nextBoolean(),
@@ -116,6 +117,18 @@ class DefaultMovieRepositoryTest {
     }
 
     @Test
+    fun synchronizeNowPlayingMovies_updates_observeMovies_correctly() = runTest {
+        val initialMovieList = movieRepository.observeMovies().first()
+        assertEquals(listOf<Movie>(), initialMovieList)
+
+        movieRepository.synchronizeNowPlayingMovies()
+
+        val synchronizedMovieList = movieRepository.observeMovies().first()
+        assertTrue(synchronizedMovieList.isNotEmpty())
+        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.NOW_PLAYING  })
+    }
+
+    @Test
     fun synchronizePopularMovies_returnsSuccess_withExpectedResult() = runTest {
         val response = movieRepository.synchronizePopularMovies()
         assertTrue(response.isSuccess)
@@ -127,6 +140,18 @@ class DefaultMovieRepositoryTest {
         movieNetworkDataSource.shouldReturnFailureResult = true
         val response = movieRepository.synchronizePopularMovies()
         assertTrue(response.isFailure)
+    }
+
+    @Test
+    fun synchronizePopularMovies_updates_observeMovies_correctly() = runTest {
+        val initialMovieList = movieRepository.observeMovies().first()
+        assertEquals(listOf<Movie>(), initialMovieList)
+
+        movieRepository.synchronizePopularMovies()
+
+        val synchronizedMovieList = movieRepository.observeMovies().first()
+        assertTrue(synchronizedMovieList.isNotEmpty())
+        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.POPULAR  })
     }
 
     @Test
@@ -144,6 +169,18 @@ class DefaultMovieRepositoryTest {
     }
 
     @Test
+    fun synchronizeTopRatedMovies_updates_observeMovies_correctly() = runTest {
+        val initialMovieList = movieRepository.observeMovies().first()
+        assertEquals(listOf<Movie>(), initialMovieList)
+
+        movieRepository.synchronizeTopRatedMovies()
+
+        val synchronizedMovieList = movieRepository.observeMovies().first()
+        assertTrue(synchronizedMovieList.isNotEmpty())
+        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.TOP_RATED  })
+    }
+
+    @Test
     fun synchronizeUpcomingMovies_returnsSuccess_withExpectedResult() = runTest {
         val response = movieRepository.synchronizeUpcomingMovies()
         assertTrue(response.isSuccess)
@@ -155,6 +192,18 @@ class DefaultMovieRepositoryTest {
         movieNetworkDataSource.shouldReturnFailureResult = true
         val response = movieRepository.synchronizeUpcomingMovies()
         assertTrue(response.isFailure)
+    }
+
+    @Test
+    fun synchronizeUpcomingMovies_updates_observeMovies_correctly() = runTest {
+        val initialMovieList = movieRepository.observeMovies().first()
+        assertEquals(listOf<Movie>(), initialMovieList)
+
+        movieRepository.synchronizeUpcomingMovies()
+
+        val synchronizedMovieList = movieRepository.observeMovies().first()
+        assertTrue(synchronizedMovieList.isNotEmpty())
+        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.UPCOMING  })
     }
 
     @Test
