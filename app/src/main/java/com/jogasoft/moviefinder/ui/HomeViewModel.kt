@@ -19,23 +19,12 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     val uiState: StateFlow<HomeUiState> = movieRepository.observeMovies()
         .map { movies ->
-            val nowPlayingMovies = mutableListOf<Movie>()
-            val popularMovies = mutableListOf<Movie>()
-            val topRatedMovies = mutableListOf<Movie>()
-            val upcomingMovies = mutableListOf<Movie>()
-            movies.forEach { movie: Movie ->
-                when(movie.category) {
-                    MovieCategory.NOW_PLAYING -> nowPlayingMovies.add(movie)
-                    MovieCategory.POPULAR -> popularMovies.add(movie)
-                    MovieCategory.TOP_RATED -> topRatedMovies.add(movie)
-                    MovieCategory.UPCOMING -> upcomingMovies.add(movie)
-                }
-            }
+            val groupedMovies = movies.groupBy { it.category }
             HomeUiState(
-                nowPlayingMovies = nowPlayingMovies,
-                popularMovies = popularMovies,
-                topRatedMovies = topRatedMovies,
-                upcomingMovies = upcomingMovies
+                nowPlayingMovies = groupedMovies[MovieCategory.NOW_PLAYING].orEmpty(),
+                popularMovies = groupedMovies[MovieCategory.POPULAR].orEmpty(),
+                topRatedMovies = groupedMovies[MovieCategory.TOP_RATED].orEmpty(),
+                upcomingMovies = groupedMovies[MovieCategory.UPCOMING].orEmpty()
             )
         }
         .stateIn(
@@ -55,11 +44,11 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             movieRepository.synchronizeNowPlayingMovies()
                 .fold(
-                onSuccess = {},
-                onFailure = {
-                    //todo: show error state
-                }
-            )
+                    onSuccess = {},
+                    onFailure = {
+                        //todo: show error state
+                    }
+                )
         }
     }
 

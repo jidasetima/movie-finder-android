@@ -42,5 +42,4 @@ fun NetworkMovie.toLocalMovie(category: MovieCategory): LocalMovie {
     )
 }
 
-
 fun List<NetworkMovie>.toLocalMovies(category: MovieCategory) = map { it.toLocalMovie(category) }

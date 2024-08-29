@@ -21,43 +21,17 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeScreenViewModelTest {
-    private val movies = mutableListOf(
+    private val movies = MovieCategory.entries.mapIndexed { index, category ->
         Movie(
-            id = 0,
+            id = index,
             backdropPath = "/backdrop1.jpg",
             overview = "Fake Overview",
             posterPath = "/poster1.jpg",
             releaseDate = "2023-07-15",
             title = "Fake title",
-            category = MovieCategory.NOW_PLAYING
-        ),
-        Movie(
-            id = 1,
-            backdropPath = "/backdrop1.jpg",
-            overview = "Fake Overview",
-            posterPath = "/poster1.jpg",
-            releaseDate = "2023-07-15",
-            title = "Fake title",
-            category = MovieCategory.POPULAR
-        ),
-        Movie(
-            id = 2,
-            backdropPath = "/backdrop1.jpg",
-            overview = "Fake Overview",
-            posterPath = "/poster1.jpg",
-            releaseDate = "2023-07-15",
-            title = "Fake title",
-            category = MovieCategory.UPCOMING
-        ), Movie(
-            id = 3,
-            backdropPath = "/backdrop1.jpg",
-            overview = "Fake Overview",
-            posterPath = "/poster1.jpg",
-            releaseDate = "2023-07-15",
-            title = "Fake title",
-            category = MovieCategory.TOP_RATED
+            category = category
         )
-    )
+    }
 
     private val movieDetail = MovieDetail(
         id = 1,

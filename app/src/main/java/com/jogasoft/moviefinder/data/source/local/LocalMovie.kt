@@ -32,5 +32,3 @@ fun LocalMovie.toMovie(): Movie {
 }
 
 fun List<LocalMovie>.toMovies() = map(LocalMovie::toMovie)
-
-

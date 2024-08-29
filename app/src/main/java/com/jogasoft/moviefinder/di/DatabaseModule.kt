@@ -30,4 +30,3 @@ object DatabaseModule {
         return movieFinderDatabase.MovieDao()
     }
 }
-

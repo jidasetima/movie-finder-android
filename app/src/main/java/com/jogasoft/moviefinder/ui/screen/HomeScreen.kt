@@ -162,64 +162,27 @@ private fun AnimatedPlaceholderMovie() {
 @PreviewLightDark
 @Composable
 fun PreviewHomeScreen() {
-    
-    val nowPlayingMovies = List(20) { index ->
-        Movie(
-            id = index,
-            backdropPath = "/backdrop1.jpg",
-            overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
-            posterPath = "/poster1.jpg",
-            releaseDate = "2023-07-15",
-            title = "The Hidden Depths",
-            category = MovieCategory.NOW_PLAYING
-        )
-    }
-
-    val popularMovies = List(20) { index ->
-        Movie(
-            id = index,
-            backdropPath = "/backdrop1.jpg",
-            overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
-            posterPath = "/poster1.jpg",
-            releaseDate = "2023-07-15",
-            title = "The Hidden Depths",
-            category = MovieCategory.POPULAR
-        )
-    }
-
-    val topRatedMovies = List(20) { index ->
-        Movie(
-            id = index,
-            backdropPath = "/backdrop1.jpg",
-            overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
-            posterPath = "/poster1.jpg",
-            releaseDate = "2023-07-15",
-            title = "The Hidden Depths",
-            category = MovieCategory.TOP_RATED
-        )
-    }
-
-    val upcomingMovies = List(20) { index ->
-        Movie(
-            id = index,
-            backdropPath = "/backdrop1.jpg",
-            overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
-            posterPath = "/poster1.jpg",
-            releaseDate = "2023-07-15",
-            title = "The Hidden Depths",
-            category = MovieCategory.UPCOMING
-        )
-    }
-
     MovieFinderTheme {
         HomeScreen(
             uiState = HomeUiState(
-                nowPlayingMovies = nowPlayingMovies,
-                popularMovies = popularMovies,
-                topRatedMovies = topRatedMovies,
-                upcomingMovies = upcomingMovies
+                nowPlayingMovies = generatePreviewMovieListByCategory(MovieCategory.NOW_PLAYING),
+                popularMovies = generatePreviewMovieListByCategory(MovieCategory.POPULAR),
+                topRatedMovies = generatePreviewMovieListByCategory(MovieCategory.TOP_RATED),
+                upcomingMovies = generatePreviewMovieListByCategory(MovieCategory.UPCOMING)
             ),
             navigateToMovieDetail = {}
         )
     }
+}
+
+private fun generatePreviewMovieListByCategory(category: MovieCategory) =  List(20) { index ->
+    Movie(
+        id = index,
+        backdropPath = "/backdrop1.jpg",
+        overview = "A thrilling adventure of a group of friends who find themselves trapped in a mysterious cave.",
+        posterPath = "/poster1.jpg",
+        releaseDate = "2023-07-15",
+        title = "The Hidden Depths",
+        category = category
+    )
 }
