@@ -40,6 +40,7 @@ jobs:
         run: ./gradlew testReleaseUnitTest
       - run: echo "The unit-test job's status is ${{ job.status }}."
   instrumented_test:
+    needs: build
     runs-on: [ macos-12 ]
     steps:
       - name: Checkout and clone repository branch ${{ github.ref }}
