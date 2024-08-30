@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Checkout and clone repository branch ${{ github.ref }}
         uses: actions/checkout@v4
-      - uses: ./.github/workflows/reusable.yml
+      - uses: .github/workflows/reusable.yml
 #      - name: Checkout and clone repository branch ${{ github.ref }}
 #        uses: actions/checkout@v4
 #      - name: Create app.properties configuration file
