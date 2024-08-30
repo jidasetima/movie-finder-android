@@ -6,8 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout and clone repository branch ${{ github.ref }}
-        uses: actions/checkout@v4
+#      - name: Checkout and clone repository branch ${{ github.ref }}
+#        uses: actions/checkout@v4
       - name: Create app.properties configuration file
         run: echo "TMDB_API_KEY = ${{ secrets.TMDB_API_KEY }}" > app.properties
       - name: Setup JDK 17
