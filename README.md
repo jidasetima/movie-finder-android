@@ -1,5 +1,6 @@
 
 # Movie Finder Android App
+![status](https://github.com/jidasetima/movie-finder-android/actions/workflows/main.yml/badge.svg?branch=main)
 
 This application is a sandbox environment designed to experiment with and test some of the latest Android features and best practices. The app utilizes the [The Movie Database (TMDb) API](https://api.themoviedb.org/) to fetch and display movie data.
 
