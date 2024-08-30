@@ -5,7 +5,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/reusable.yml
       - name: Checkout and clone repository branch ${{ github.ref }}
         uses: actions/checkout@v4
       - name: Create app.properties configuration file
