@@ -1,4 +1,4 @@
-package com.jogasoft.moviefinder.ui
+package com.jogasoft.moviefinder.ui.viewModel
 
 import com.jogasoft.moviefinder.data.FakeMovieRepository
 import com.jogasoft.moviefinder.data.Movie
@@ -20,7 +20,7 @@ import org.junit.Test
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class HomeScreenViewModelTest {
+class HomeViewModelTest {
     private val movies = MovieCategory.entries.mapIndexed { index, category ->
         Movie(
             id = index,

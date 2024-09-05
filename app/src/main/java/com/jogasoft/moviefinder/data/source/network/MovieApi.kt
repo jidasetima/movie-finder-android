@@ -5,6 +5,7 @@ import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMov
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieApi {
     @GET("movie/now_playing")
@@ -18,6 +19,9 @@ interface MovieApi {
 
     @GET("movie/upcoming?language=en-US&page=1")
     suspend fun getUpcomingMovies(): Response<NetworkMoviePage>
+
+    @GET("search/movie")
+    suspend fun searchMovies(@Query("query") query: String): Response<NetworkMoviePage>
 
     @GET("movie/{movieId}")
     suspend fun getMovieDetailById(@Path("movieId") movieId: Int): Response<NetworkMovieDetail>

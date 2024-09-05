@@ -8,10 +8,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.jogasoft.moviefinder.ui.HomeViewModel
-import com.jogasoft.moviefinder.ui.MovieDetailViewModel
+import com.jogasoft.moviefinder.ui.viewModel.HomeViewModel
+import com.jogasoft.moviefinder.ui.viewModel.MovieDetailViewModel
 import com.jogasoft.moviefinder.ui.screen.HomeScreen
+import com.jogasoft.moviefinder.ui.screen.SearchScreen
 import com.jogasoft.moviefinder.ui.screen.MovieDetailScreen
+import com.jogasoft.moviefinder.ui.viewModel.SearchViewModel
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -19,6 +21,9 @@ object HomeScreen
 
 @Serializable
 data class MovieDetailScreen(val movieId: Int)
+
+@Serializable
+object SearchScreen
 
 // Test Tags
 const val NavHostTestTag = "NavHostTestTag"
@@ -39,7 +44,8 @@ fun MovieFinderAppNavigationHost(navController: NavHostController) {
                 uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
                 navigateToMovieDetail = { movieId ->
                     navController.navigate(MovieDetailScreen(movieId))
-                }
+                },
+                navigateToSearch = { navController.navigate(SearchScreen) }
             )
         }
 
@@ -49,6 +55,19 @@ fun MovieFinderAppNavigationHost(navController: NavHostController) {
                 modifier = Modifier.testTag(NavHostMovieDetailScreenTestTag),
                 uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
                 navigateBackAction = { navController.popBackStack() }
+            )
+        }
+
+        composable<SearchScreen> {
+            val viewModel = hiltViewModel<SearchViewModel>()
+            SearchScreen(
+                uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
+                searchText = viewModel.searchTextState.collectAsStateWithLifecycle().value,
+                updateSearchTextAction = viewModel::updateSearchText,
+                navigateBackAction = { navController.popBackStack() },
+                navigateToMovieDetail = { movieId ->
+                    navController.navigate(MovieDetailScreen(movieId))
+                }
             )
         }
     }

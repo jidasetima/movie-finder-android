@@ -2,8 +2,8 @@ package com.jogasoft.moviefinder.data.source.network
 
 import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
 import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkGenre
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkBelongsToCollection
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkGenre
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkProductionCompany
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkProductionCountry
@@ -107,7 +107,6 @@ class DefaultMovieNetworkDataSourceTest {
 
     @Before
     fun setUp() {
-
     }
 
     @After
@@ -116,122 +115,137 @@ class DefaultMovieNetworkDataSourceTest {
     }
 
     @Test
-    fun `getNowPlayingMovies returns success with expected result`() = runTest {
+    fun getNowPlayingMovies_returnsSuccess_withExpectedResult() = runTest {
         val response = movieNetworkDataSource.getNowPlayingMovies()
         assertTrue(response.isSuccess)
         assertEquals(networkMoviePage.results, response.getOrNull())
     }
 
     @Test
-    fun `getNowPlayingMovies returns failure with expected result`() = runTest {
+    fun getNowPlayingMovies_returnsFailure_withExpectedResult() = runTest {
         movieApi.shouldReturnErrorResponse = true
         val response = movieNetworkDataSource.getNowPlayingMovies()
         assertTrue(response.isFailure)
     }
 
     @Test
-    fun `getNowPlayingMovies throws CancellationException when cancelled`() = runTest {
+    fun getNowPlayingMovies_ThrowsCancellationException_WhenCancelled() = runTest {
         movieApi.shouldThrowCancellationException = true
-        assertFailsWith<CancellationException>(
-            block = {
-                movieNetworkDataSource.getNowPlayingMovies()
-            }
-        )
+        assertFailsWith<CancellationException> {
+            movieNetworkDataSource.getNowPlayingMovies()
+        }
     }
 
     @Test
-    fun `getPopularMovies returns success with expected result`() = runTest {
+    fun getPopularMovies_returnsSuccess_withExpectedResult() = runTest {
         val response = movieNetworkDataSource.getPopularMovies()
         assertTrue(response.isSuccess)
         assertEquals(networkMoviePage.results, response.getOrNull())
     }
 
     @Test
-    fun `getPopularMovies returns failure with expected result`() = runTest {
+    fun getPopularMovies_returnsFailure_withExpectedResult() = runTest {
         movieApi.shouldReturnErrorResponse = true
         val response = movieNetworkDataSource.getPopularMovies()
         assertTrue(response.isFailure)
     }
 
     @Test
-    fun `getPopularMovies throws CancellationException when cancelled`() = runTest {
+    fun getPopularMovies_ThrowsCancellationException_whenCancelled() = runTest {
         movieApi.shouldThrowCancellationException = true
-        assertFailsWith<CancellationException>(
-            block = {
-                movieNetworkDataSource.getPopularMovies()
-            }
-        )
+        assertFailsWith<CancellationException> {
+            movieNetworkDataSource.getPopularMovies()
+        }
     }
 
     @Test
-    fun `getTopRatedMovies returns success with expected result`() = runTest {
+    fun getTopRatedMovies_returnsSuccess_withExpectedResult() = runTest {
         val response = movieNetworkDataSource.getTopRatedMovies()
         assertTrue(response.isSuccess)
         assertEquals(networkMoviePage.results, response.getOrNull())
     }
 
     @Test
-    fun `getTopRatedMovies returns failure with expected result`() = runTest {
+    fun getTopRatedMovies_returnsFailure_withExpectedResult() = runTest {
         movieApi.shouldReturnErrorResponse = true
         val response = movieNetworkDataSource.getTopRatedMovies()
         assertTrue(response.isFailure)
     }
 
     @Test
-    fun `getTopRatedMovies throws CancellationException when cancelled`() = runTest {
+    fun getTopRatedMovies_throwsCancellationException_whenCancelled() = runTest {
         movieApi.shouldThrowCancellationException = true
-        assertFailsWith<CancellationException>(
-            block = {
-                movieNetworkDataSource.getTopRatedMovies()
-            }
-        )
+        assertFailsWith<CancellationException> {
+            movieNetworkDataSource.getTopRatedMovies()
+        }
     }
 
     @Test
-    fun `getUpcomingMovies returns success with expected result`() = runTest {
+    fun getUpcomingMovies_returnsSuccess_withExpectedResult() = runTest {
         val response = movieNetworkDataSource.getUpcomingMovies()
         assertTrue(response.isSuccess)
         assertEquals(networkMoviePage.results, response.getOrNull())
     }
 
     @Test
-    fun `getUpcomingMovies returns failure with expected result`() = runTest {
+    fun getUpcomingMovies_returnsFailure_withExpectedResult() = runTest {
         movieApi.shouldReturnErrorResponse = true
         val response = movieNetworkDataSource.getUpcomingMovies()
         assertTrue(response.isFailure)
     }
 
     @Test
-    fun `getUpcomingMovies throws CancellationException when cancelled`() = runTest {
+    fun getUpcomingMovies_throwsCancellationException_whenCancelled() = runTest {
         movieApi.shouldThrowCancellationException = true
-        assertFailsWith<CancellationException>(
-            block = {
-                movieNetworkDataSource.getUpcomingMovies()
-            }
+        assertFailsWith<CancellationException> {
+            movieNetworkDataSource.getUpcomingMovies()
+        }
+    }
+
+    @Test
+    fun searchMovies_returnsSuccess_withExpectedResult() = runTest {
+        val searchQuery = "a"
+        val response = movieNetworkDataSource.searchMovies(searchQuery)
+        assertEquals(
+            networkMoviePage.results.filter { it.title.contains(searchQuery) },
+            response.getOrNull()
         )
     }
 
     @Test
-    fun `getMovieDetailById returns success with expected result`() = runTest {
+    fun searchMovies_returnsFailure_withExpectedResult() = runTest {
+        movieApi.shouldReturnErrorResponse = true
+        val response = movieNetworkDataSource.searchMovies("a")
+        assertTrue(response.isFailure)
+    }
+
+    @Test
+    fun searchMovies_throwsCancellationException_whenCancelled() = runTest {
+        movieApi.shouldThrowCancellationException = true
+        assertFailsWith<CancellationException> {
+            movieNetworkDataSource.searchMovies("a")
+        }
+    }
+
+    @Test
+    fun getMovieDetailById_returnsSuccess_withExpectedResult() = runTest {
         val response = movieNetworkDataSource.getMovieDetailById(movieDetailId)
         assertTrue(response.isSuccess)
         assertEquals(movieDetail, response.getOrNull())
     }
 
     @Test
-    fun `getMovieDetailById returns failure with expected result`() = runTest {
+    fun getMovieDetailById_returnsFailure_withExpectedResult() = runTest {
         movieApi.shouldReturnErrorResponse = true
         val response = movieNetworkDataSource.getMovieDetailById(movieDetailId)
         assertTrue(response.isFailure)
     }
 
     @Test
-    fun `getMovieDetailById throws CancellationException when cancelled`() = runTest {
+    fun getMovieDetailById_throwsCancellationException_whenCancelled() = runTest {
         movieApi.shouldThrowCancellationException = true
-        assertFailsWith<CancellationException>(
-            block = {
-                movieNetworkDataSource.getMovieDetailById(movieDetailId)
-            }
-        )
+        assertFailsWith<CancellationException> {
+            movieNetworkDataSource.getMovieDetailById(movieDetailId)
+        }
     }
 }

@@ -37,6 +37,13 @@ class FakeMovieNetworkDataSource(
         }
     }
 
+    override suspend fun searchMovies(query: String): Result<List<NetworkMovie>> {
+        return when {
+            shouldReturnFailureResult -> Result.failure(Exception())
+            else -> Result.success(networkMovies)
+        }
+    }
+
     override suspend fun getMovieDetailById(movieId: Int): Result<NetworkMovieDetail> {
         return when {
             networkMovieDetail.id == movieId -> Result.success(networkMovieDetail)

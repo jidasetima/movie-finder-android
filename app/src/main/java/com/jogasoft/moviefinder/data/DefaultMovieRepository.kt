@@ -71,6 +71,17 @@ class DefaultMovieRepository @Inject constructor(
         )
     }
 
+    override suspend fun getMoviesBySearchQuery(query: String): Result<List<Movie>> {
+        return movieNetworkDataSource.searchMovies(query).fold(
+            onSuccess = {
+                Result.success(it.toLocalMovies(MovieCategory.SEARCH).toMovies())
+            },
+            onFailure = {
+                Result.failure(it)
+            }
+        )
+    }
+
     override suspend fun getMovieDetailById(movieId: Int): Result<MovieDetail> {
         return movieNetworkDataSource.getMovieDetailById(movieId).fold(
             onSuccess = { Result.success(it.toMovieDetail()) },

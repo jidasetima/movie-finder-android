@@ -8,5 +8,6 @@ interface MovieRepository {
     suspend fun synchronizePopularMovies(): Result<Unit>
     suspend fun synchronizeTopRatedMovies(): Result<Unit>
     suspend fun synchronizeUpcomingMovies(): Result<Unit>
+    suspend fun getMoviesBySearchQuery(query: String): Result<List<Movie>>
     suspend fun getMovieDetailById(movieId: Int): Result<MovieDetail>
 }

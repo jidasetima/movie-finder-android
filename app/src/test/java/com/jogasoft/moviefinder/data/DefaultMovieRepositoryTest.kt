@@ -3,8 +3,8 @@ package com.jogasoft.moviefinder.data
 import com.jogasoft.moviefinder.data.source.local.FakeMovieDao
 import com.jogasoft.moviefinder.data.source.network.FakeMovieNetworkDataSource
 import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkGenre
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkBelongsToCollection
+import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkGenre
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkProductionCompany
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkProductionCountry

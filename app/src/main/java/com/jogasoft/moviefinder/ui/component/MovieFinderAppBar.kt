@@ -1,5 +1,6 @@
 package com.jogasoft.moviefinder.ui.component
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,7 +25,8 @@ const val AppBarBackButtonTestTag = "AppBarBackButtonTestTag"
 @Composable
 fun MovieFinderAppBar(
     modifier: Modifier = Modifier,
-    navigateBackAction: (() -> Unit)? = null
+    navigateBackAction: (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
         modifier = modifier,
@@ -33,7 +35,7 @@ fun MovieFinderAppBar(
                 text = stringResource(id = R.string.app_name),
                 style = MaterialTheme.typography.titleLarge
             )
-                },
+        },
         colors = topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
         ),
@@ -43,12 +45,14 @@ fun MovieFinderAppBar(
                     modifier = Modifier.testTag(AppBarBackButtonTestTag),
                     onClick = { navigateBackAction() }
                 ) {
-                    Icon(imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Navigation Back Arrow"
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = stringResource(id = R.string.back_navigation_arrow_button)
                     )
                 }
             }
-        }
+        },
+        actions = actions
     )
 }
 
