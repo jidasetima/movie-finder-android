@@ -1,5 +1,0 @@
-# Summary
-
-## Notable Changes
-
-## Screenshots
