@@ -5,6 +5,8 @@
 This application is a sandbox environment designed to experiment with and test some of the latest Android features and best practices. The app utilizes the [The Movie Database (TMDb) API](https://api.themoviedb.org/) to fetch and display movie data.
 
 ## Features
+- Search Movies
+  - Search movies by title
 - Movie Categories
   - Fetches and Displays posters of latest movies from the following TMDB categories
     - Now Playing

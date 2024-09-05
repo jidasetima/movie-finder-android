@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import com.jogasoft.moviefinder.BuildConfig
 import com.jogasoft.moviefinder.data.MovieDetail
-import com.jogasoft.moviefinder.ui.MovieDetailUiState
+import com.jogasoft.moviefinder.ui.viewModel.MovieDetailUiState
 import com.jogasoft.moviefinder.ui.component.MovieFinderAppBar
 import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
 

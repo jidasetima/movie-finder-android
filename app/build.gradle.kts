@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 val appPropertiesFile = rootProject.file("app.properties")
@@ -24,8 +25,8 @@ android {
         applicationId = "com.jogasoft.moviefinder"
         minSdk = 24
         targetSdk = 34
-        versionCode = 8
-        versionName = "0.0.8"
+        versionCode = 9
+        versionName = "0.0.9"
 
         testInstrumentationRunner = "com.jogasoft.moviefinder.MovieFinderHiltTestRunner"
         vectorDrawables {
@@ -46,17 +47,21 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
         buildConfig = true
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -67,6 +72,10 @@ android {
         unitTests {
             isReturnDefaultValues = true
         }
+    }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
     }
 }
 

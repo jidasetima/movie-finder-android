@@ -1,4 +1,4 @@
-package com.jogasoft.moviefinder.ui
+package com.jogasoft.moviefinder.ui.viewModel
 
 import androidx.lifecycle.SavedStateHandle
 import com.jogasoft.moviefinder.data.FakeMovieRepository
@@ -39,7 +39,6 @@ class MovieDetailViewModelTest{
 
     @Before
     fun setUp() {
-
         val testDispatcher = StandardTestDispatcher()
         Dispatchers.setMain(testDispatcher)
         movieDetailViewModel = MovieDetailViewModel(

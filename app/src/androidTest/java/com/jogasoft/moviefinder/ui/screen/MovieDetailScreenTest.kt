@@ -7,7 +7,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import com.jogasoft.moviefinder.data.MovieDetail
-import com.jogasoft.moviefinder.ui.MovieDetailUiState
+import com.jogasoft.moviefinder.ui.viewModel.MovieDetailUiState
 import org.junit.Rule
 import org.junit.Test
 

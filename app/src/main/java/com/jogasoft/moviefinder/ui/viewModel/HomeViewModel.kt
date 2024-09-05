@@ -1,4 +1,4 @@
-package com.jogasoft.moviefinder.ui
+package com.jogasoft.moviefinder.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

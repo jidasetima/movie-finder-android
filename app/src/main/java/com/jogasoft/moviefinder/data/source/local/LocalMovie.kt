@@ -10,9 +10,9 @@ import com.jogasoft.moviefinder.data.MovieCategory
 )
 data class LocalMovie(
     val id: Int,
-    val backdropPath: String,
+    val backdropPath: String?,
     val overview: String,
-    val posterPath: String,
+    val posterPath: String?,
     val releaseDate: String,
     val title: String,
     val category: MovieCategory

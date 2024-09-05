@@ -8,5 +8,6 @@ interface MovieNetworkDataSource {
     suspend fun getPopularMovies(): Result<List<NetworkMovie>>
     suspend fun getTopRatedMovies(): Result<List<NetworkMovie>>
     suspend fun getUpcomingMovies(): Result<List<NetworkMovie>>
+    suspend fun searchMovies(query: String): Result<List<NetworkMovie>>
     suspend fun getMovieDetailById(movieId: Int): Result<NetworkMovieDetail>
 }

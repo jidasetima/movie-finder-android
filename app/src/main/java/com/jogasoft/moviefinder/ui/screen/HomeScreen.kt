@@ -1,15 +1,7 @@
 package com.jogasoft.moviefinder.ui.screen
 
-import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -19,25 +11,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import coil.compose.SubcomposeAsyncImage
 import com.jogasoft.moviefinder.BuildConfig
 import com.jogasoft.moviefinder.R
 import com.jogasoft.moviefinder.data.Movie
 import com.jogasoft.moviefinder.data.MovieCategory
-import com.jogasoft.moviefinder.ui.HomeUiState
 import com.jogasoft.moviefinder.ui.component.MovieFinderAppBar
+import com.jogasoft.moviefinder.ui.component.MovieItemImageLoader
+import com.jogasoft.moviefinder.ui.component.MovieItemNoImagePlaceholder
 import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
+import com.jogasoft.moviefinder.ui.viewModel.HomeUiState
 
 // Test tags
 const val HomeLazyColumnTestTag = "HomeLazyColumnTestTag"
@@ -46,11 +41,23 @@ const val HomeLazyColumnTestTag = "HomeLazyColumnTestTag"
 fun HomeScreen(
     modifier: Modifier = Modifier,
     uiState: HomeUiState,
-    navigateToMovieDetail: (Int) -> Unit
+    navigateToMovieDetail: (Int) -> Unit,
+    navigateToSearch: () -> Unit
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = { MovieFinderAppBar() }
+        topBar = {
+            MovieFinderAppBar(
+                actions = {
+                    IconButton(onClick = navigateToSearch) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = stringResource(R.string.search_icon_button)
+                        )
+                    }
+                }
+            )
+        }
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
@@ -124,39 +131,22 @@ private fun LazyMovieRow(
                 items = movies,
                 key = { movie -> movie.id }
             ) { movie ->
-                SubcomposeAsyncImage(
-                    model = "${BuildConfig.BASE_TMDB_IMAGE_URL}/w342/${movie.posterPath}",
-                    loading = {
-                        AnimatedPlaceholderMovie()
-                    },
-                    error = {
-                        AnimatedPlaceholderMovie()
-                    },
-                    contentDescription = "${movie.title} image",
-                    modifier = Modifier
-                        .aspectRatio(2f / 3f)
-                        .clickable { navigateToMovieDetail(movie.id) }
-                )
+                movie.posterPath?.let {
+                    MovieItemImageLoader(
+                        imageUrl = "${BuildConfig.BASE_TMDB_IMAGE_URL}/w342/${movie.posterPath}",
+                        movieTitle = movie.title,
+                        navigateToMovieDetailAction = { navigateToMovieDetail(movie.id) }
+                    )
+                } ?: run {
+                    MovieItemNoImagePlaceholder(
+                        modifier = Modifier
+                            .aspectRatio(2f / 3f),
+                        title = movie.title
+                    )
+                }
             }
         }
     }
-}
-
-@Composable
-private fun AnimatedPlaceholderMovie() {
-    val infiniteTransition = rememberInfiniteTransition(label = "AnimatedPlaceholderMovie")
-    val color by infiniteTransition.animateColor(
-        initialValue = Color.DarkGray,
-        targetValue = Color.Gray,
-        animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse,
-        ), label = "AnimatedPlaceholderMovie Color"
-    )
-    Box(
-        modifier = Modifier
-            .background(color)
-    )
 }
 
 @PreviewLightDark
@@ -170,12 +160,13 @@ fun PreviewHomeScreen() {
                 topRatedMovies = generatePreviewMovieListByCategory(MovieCategory.TOP_RATED),
                 upcomingMovies = generatePreviewMovieListByCategory(MovieCategory.UPCOMING)
             ),
-            navigateToMovieDetail = {}
+            navigateToMovieDetail = {},
+            navigateToSearch = {}
         )
     }
 }
 
-private fun generatePreviewMovieListByCategory(category: MovieCategory) =  List(20) { index ->
+private fun generatePreviewMovieListByCategory(category: MovieCategory) = List(20) { index ->
     Movie(
         id = index,
         backdropPath = "/backdrop1.jpg",
