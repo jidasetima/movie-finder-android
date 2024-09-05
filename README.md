@@ -2,33 +2,52 @@
 # Movie Finder Android App
 ![status](https://github.com/jidasetima/movie-finder-android/actions/workflows/main.yml/badge.svg?branch=main)
 
-This application is a sandbox environment designed to experiment with and test some of the latest Android features and best practices. The app utilizes the [The Movie Database (TMDb) API](https://api.themoviedb.org/) to fetch and display movie data.
+This Movie Finder Android app is designed as a sandbox environment for experimenting with the latest Android development features and best practices. It showcases clean architecture, Jetpack Compose, dependency injection with Hilt, and offline support using the Room database. The app fetches movie data from [The Movie Database (TMDb) API](https://api.themoviedb.org/) and allows users to search, browse categories, and view detailed information about each movie.
+
+## Preview 
+<p align="center">
+  <img src=".github/images/preview_v1.gif" alt="Movie App Preview" width="250">
+</p>
 
 ## Features
-- Search Movies
-  - Search movies by title
-- Movie Categories
-  - Fetches and Displays posters of latest movies from the following TMDB categories
-    - Now Playing
-    - Popular
-    - Top Rated
-    - Upcoming
-- Movie Details
-  -  Get more detailed information about a movie by selecting it from any category list.
-- Offline Support
-  - Allows viewing of previously stored movie categories even when offline.
-- Future Enhancements
-  - To be determined (TBD).
+- **Search Movies**: Search for movies by title with live suggestions.
+- **Movie Categories**: Browse and view posters of the latest movies from TMDb's categories:
+  - Now Playing
+  - Popular
+  - Top Rated
+  - Upcoming
+- **Movie Details**: Select a movie from any category to view detailed information such as the overview, release date, and backdrop image.
+- **Offline Support**: Previously fetched movie categories can be viewed even without an internet connection.
+- **Future Enhancements**:
+  - More features will be added (TBD).
 
 ## Requirements
 - **Minimum SDK:** 24 (Android 7.0 Nougat)
 - **Target SDK:** 34 (Android Upside Down Cake)
 
+## Libraries and Tools Used
+
+This project leverages the following libraries and tools:
+
+- [**Jetpack Compose**](https://developer.android.com/jetpack/compose) - Android's modern toolkit for building native UI.
+- [**Hilt**](https://developer.android.com/training/dependency-injection/hilt-android) - A dependency injection library built on top of Dagger.
+- [**Room**](https://developer.android.com/jetpack/androidx/releases/room) - A SQLite object-mapping library for local database storage.
+- [**Retrofit**](https://square.github.io/retrofit/) - A type-safe HTTP client for consuming REST APIs.
+- [**Moshi**](https://github.com/square/moshi) - A modern JSON library for Android and Java, used for parsing JSON responses.
+- [**Coil**](https://coil-kt.github.io/coil/) - An image loading library for Android backed by Kotlin Coroutines.
+- [**Kotlin Coroutines**](https://kotlinlang.org/docs/coroutines-overview.html) - Asynchronous programming support for Kotlin.
+- [**Navigation Component**](https://developer.android.com/guide/navigation) - Android Jetpack's framework for in-app navigation, integrated with Compose.
+- [**Material Design 3**](https://m3.material.io/) - Implements Material Design 3 (Material You) components in Compose.
+- [**JUnit**](https://junit.org/junit4/) - A widely-used testing framework for Java and Kotlin.
+
 ## Installation
-1. Clone the repository
-2. Navigate to https://api.themoviedb.org/ and create an account and API Key
-3. Make a copy of app.properties.example file named app.properties
-4. Add the API Key to the TMDB_API_KEY value in app.properties file
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jidasetima/movie-finder-android.git
+2. Navigate to https://api.themoviedb.org/ to create an account and generate an API Key
+3. Create a copy of the app.properties.example file and rename it to app.properties.
+4. Add your API Key to the TMDB_API_KEY field in the app.properties file: ```TMDB_API_KEY=your_api_key_here```
+
 
 ## Contact
 John Idasetima - jidasetima@gmail.com
