@@ -21,6 +21,7 @@ lifecycleViewmodelCompose = "2.8.4"
 material = "1.12.0"
 moshi = "1.13.0"
 navigation = "2.8.0-rc01"
+paging = "3.3.2"
 retrofit = "2.11.0"
 room = "2.6.1"
 
@@ -50,10 +51,14 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltCompiler"}
 
-#Navigation
+# Navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation"}
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation"}
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigation"}
+
+# Paging
+androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging"}
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging"}
 
 # Retrofit & Moshi
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
@@ -67,12 +72,13 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
 
 # Testing
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-paging-test = { group = "androidx.paging", name = "paging-testing", version.ref = "paging"}
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt"}
+junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 kotlin-coroutine-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }

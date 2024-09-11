@@ -11,6 +11,7 @@ This Movie Finder Android app is designed as a sandbox environment for experimen
 
 ## Features
 - **Search Movies**: Search for movies by title with live suggestions.
+  - Supports pagination with infinite scroll
 - **Movie Categories**: Browse and view posters of the latest movies from TMDb's categories:
   - Now Playing
   - Popular
@@ -37,6 +38,7 @@ This project leverages the following libraries and tools:
 - [**Coil**](https://coil-kt.github.io/coil/) - An image loading library for Android backed by Kotlin Coroutines.
 - [**Kotlin Coroutines**](https://kotlinlang.org/docs/coroutines-overview.html) - Asynchronous programming support for Kotlin.
 - [**Navigation Component**](https://developer.android.com/guide/navigation) - Android Jetpack's framework for in-app navigation, integrated with Compose.
+- [**Paging 3**](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - Library for efficient data pagination in Android apps.
 - [**Material Design 3**](https://m3.material.io/) - Implements Material Design 3 (Material You) components in Compose.
 - [**JUnit**](https://junit.org/junit4/) - A widely-used testing framework for Java and Kotlin.
 

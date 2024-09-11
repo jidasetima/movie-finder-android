@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
@@ -27,6 +26,9 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.jogasoft.moviefinder.BuildConfig
 import com.jogasoft.moviefinder.R
 import com.jogasoft.moviefinder.data.Movie
@@ -34,15 +36,15 @@ import com.jogasoft.moviefinder.data.MovieCategory
 import com.jogasoft.moviefinder.ui.component.MovieItemImageLoader
 import com.jogasoft.moviefinder.ui.component.MovieItemNoImagePlaceholder
 import com.jogasoft.moviefinder.ui.theme.MovieFinderTheme
-import com.jogasoft.moviefinder.ui.viewModel.SearchUiState
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun SearchScreen(
     modifier: Modifier = Modifier,
-    uiState: SearchUiState,
+    moviePagerItems: LazyPagingItems<Movie>,
     searchText: String,
     updateSearchTextAction: (String) -> Unit,
-    navigateToMovieDetail: (Int) -> Unit,
+    navigateToMovieDetailAction: (Int) -> Unit,
     navigateBackAction: () -> Unit
 ) {
     Scaffold(
@@ -104,26 +106,36 @@ fun SearchScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(
-                    uiState.movies,
-                    key = { it.id }
-                ) { movie ->
-                    movie.posterPath?.let {
-                        MovieItemImageLoader(
-                            imageUrl = "${BuildConfig.BASE_TMDB_IMAGE_URL}/w342/${movie.posterPath}",
-                            movieTitle = movie.title,
-                            navigateToMovieDetailAction = { navigateToMovieDetail(movie.id) }
-                        )
-                    } ?: run {
-                        MovieItemNoImagePlaceholder(
-                            modifier = Modifier
-                                .aspectRatio(2f / 3f),
-                            title = movie.title
+                items(count = moviePagerItems.itemCount) { index: Int ->
+                     moviePagerItems[index]?.let { movie ->
+                        SearchMovieItem(
+                            movie = movie,
+                            navigateToMovieDetailAction = { navigateToMovieDetailAction(movie.id) }
                         )
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun SearchMovieItem(
+    movie: Movie,
+    navigateToMovieDetailAction: () -> Unit
+) {
+    movie.posterPath?.let {
+        MovieItemImageLoader(
+            imageUrl = "${BuildConfig.BASE_TMDB_IMAGE_URL}/w342/${movie.posterPath}",
+            movieTitle = movie.title,
+            navigateToMovieDetailAction = navigateToMovieDetailAction
+        )
+    } ?: run {
+        MovieItemNoImagePlaceholder(
+            modifier = Modifier
+                .aspectRatio(2f / 3f),
+            title = movie.title
+        )
     }
 }
 
@@ -143,12 +155,10 @@ private fun PreviewSearchScreen() {
     }
     MovieFinderTheme {
         SearchScreen(
-            uiState = SearchUiState(
-                movies = movies
-            ),
+            moviePagerItems = flowOf(PagingData.from(movies)).collectAsLazyPagingItems(),
             searchText = "",
             updateSearchTextAction = {},
-            navigateToMovieDetail = {},
+            navigateToMovieDetailAction = {},
             navigateBackAction = {}
         )
     }

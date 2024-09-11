@@ -205,25 +205,37 @@ class DefaultMovieNetworkDataSourceTest {
     @Test
     fun searchMovies_returnsSuccess_withExpectedResult() = runTest {
         val searchQuery = "a"
-        val response = movieNetworkDataSource.searchMovies(searchQuery)
+        val response = movieNetworkDataSource.paginateSearchedMovies(
+            networkMoviePage.page,
+            searchQuery
+        )
+
         assertEquals(
-            networkMoviePage.results.filter { it.title.contains(searchQuery) },
+            networkMoviePage,
             response.getOrNull()
         )
     }
 
     @Test
     fun searchMovies_returnsFailure_withExpectedResult() = runTest {
+        val searchQuery = "a"
         movieApi.shouldReturnErrorResponse = true
-        val response = movieNetworkDataSource.searchMovies("a")
+        val response = movieNetworkDataSource.paginateSearchedMovies(
+            networkMoviePage.page,
+            searchQuery
+        )
         assertTrue(response.isFailure)
     }
 
     @Test
     fun searchMovies_throwsCancellationException_whenCancelled() = runTest {
+        val searchQuery = "a"
         movieApi.shouldThrowCancellationException = true
         assertFailsWith<CancellationException> {
-            movieNetworkDataSource.searchMovies("a")
+            movieNetworkDataSource.paginateSearchedMovies(
+                networkMoviePage.page,
+                searchQuery
+            )
         }
     }
 

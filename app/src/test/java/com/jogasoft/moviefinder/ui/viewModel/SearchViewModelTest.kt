@@ -63,15 +63,6 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun initializes_uiState_with_correct_values() = runTest {
-        val uiState = SearchUiState()
-        assertEquals(listOf(), uiState.movies)
-        
-        val uiStateFlow = searchViewModel.uiState.value
-        assertEquals(listOf(), uiStateFlow.movies)
-    }
-
-    @Test
     fun initializes_searchTextState_with_correct_values() = runTest {
         val searchTextState = searchViewModel.searchTextState.value
         assertEquals("", searchTextState)

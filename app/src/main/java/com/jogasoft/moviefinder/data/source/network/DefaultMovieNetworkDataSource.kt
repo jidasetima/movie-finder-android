@@ -33,26 +33,29 @@ class DefaultMovieNetworkDataSource @Inject constructor(
         return getMovieListByType(MovieRequestType.UPCOMING)
     }
 
-    override suspend fun searchMovies(query: String): Result<List<NetworkMovie>> {
+    override suspend fun paginateSearchedMovies(
+        page: Int,
+        query: String
+    ): Result<NetworkMoviePage> {
         return try {
-            val response = movieApi.searchMovies(query)
-            val moviePage = response.body()
+            val response = movieApi.paginateSearchedMovies(page, query)
+            val networkMoviePage = response.body()
 
-            if (response.isSuccessful && moviePage != null) {
-                Result.success(moviePage.results)
+            if (response.isSuccessful && networkMoviePage != null) {
+                Result.success(networkMoviePage)
             } else {
                 Result.failure(
                     NetworkException(
-                        message = response.errorBody()?.string() ?: "Movie Search request failed",
+                        message = response.errorBody()?.string() ?: "Paged Movie Search request failed",
                         responseCode = response.code(),
                     )
                 )
             }
         } catch (e: CancellationException) {
-            Log.e(TAG, "Search Movies request operation was canceled", e)
+            Log.e(TAG, "Paged search Movies request operation was canceled", e)
             throw e
         } catch (e: Exception) {
-            Log.e(TAG, "Search Movies request failed", e)
+            Log.e(TAG, "Paged search Movies request failed", e)
             Result.failure(e)
         }
     }
