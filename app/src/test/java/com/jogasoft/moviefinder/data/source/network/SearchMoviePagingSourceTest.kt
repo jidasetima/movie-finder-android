@@ -124,7 +124,6 @@ class SearchMoviePagingSourceTest {
             pagingSource = pagingSource
         )
 
-        pager.append()
         val result = pager.refresh() as PagingSource.LoadResult.Page
 
         assertEquals(result.data, networkMoviePage.results)
