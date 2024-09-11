@@ -11,17 +11,20 @@ interface MovieApi {
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(): Response<NetworkMoviePage>
 
-    @GET("movie/popular?language=en-US&page=1")
+    @GET("movie/popular")
     suspend fun getPopularMovies(): Response<NetworkMoviePage>
 
-    @GET("movie/top_rated?language=en-US&page=1")
+    @GET("movie/top_rated")
     suspend fun getTopRatedMovies(): Response<NetworkMoviePage>
 
-    @GET("movie/upcoming?language=en-US&page=1")
+    @GET("movie/upcoming")
     suspend fun getUpcomingMovies(): Response<NetworkMoviePage>
 
     @GET("search/movie")
-    suspend fun searchMovies(@Query("query") query: String): Response<NetworkMoviePage>
+    suspend fun paginateSearchedMovies(
+        @Query("page") page: Int,
+        @Query("query") query: String
+    ): Response<NetworkMoviePage>
 
     @GET("movie/{movieId}")
     suspend fun getMovieDetailById(@Path("movieId") movieId: Int): Response<NetworkMovieDetail>

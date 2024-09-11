@@ -1,8 +1,15 @@
 package com.jogasoft.moviefinder.data
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.jogasoft.moviefinder.data.source.local.database.MovieDao
+import com.jogasoft.moviefinder.data.source.local.toMovie
 import com.jogasoft.moviefinder.data.source.local.toMovies
 import com.jogasoft.moviefinder.data.source.network.MovieNetworkDataSource
+import com.jogasoft.moviefinder.data.source.network.SearchMoviePagingSource
+import com.jogasoft.moviefinder.data.source.network.model.movie.toLocalMovie
 import com.jogasoft.moviefinder.data.source.network.model.movie.toLocalMovies
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.toMovieDetail
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +21,22 @@ class DefaultMovieRepository @Inject constructor(
     private val movieNetworkDataSource: MovieNetworkDataSource
 ) : MovieRepository {
     override fun observeMovies(): Flow<List<Movie>> = movieDao.observeMovies().map { it.toMovies() }
+    override fun observePagedSearchedMovies(query: String): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                prefetchDistance = 3
+            ),
+            initialKey = null
+        ) {
+            SearchMoviePagingSource(
+                movieNetworkDataSource = movieNetworkDataSource,
+                query = query
+            )
+        }.flow.map { pagingData ->
+            pagingData.map { it.toLocalMovie(MovieCategory.SEARCH).toMovie() }
+        }
+    }
 
     override suspend fun synchronizeNowPlayingMovies(): Result<Unit> {
         return movieNetworkDataSource.getNowPlayingMovies().fold(
@@ -68,17 +91,6 @@ class DefaultMovieRepository @Inject constructor(
                 Result.success(Unit)
             },
             onFailure = { Result.failure(it) }
-        )
-    }
-
-    override suspend fun getMoviesBySearchQuery(query: String): Result<List<Movie>> {
-        return movieNetworkDataSource.searchMovies(query).fold(
-            onSuccess = {
-                Result.success(it.toLocalMovies(MovieCategory.SEARCH).toMovies())
-            },
-            onFailure = {
-                Result.failure(it)
-            }
         )
     }
 

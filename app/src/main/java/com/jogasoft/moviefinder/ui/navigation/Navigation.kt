@@ -8,6 +8,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.jogasoft.moviefinder.ui.viewModel.HomeViewModel
 import com.jogasoft.moviefinder.ui.viewModel.MovieDetailViewModel
 import com.jogasoft.moviefinder.ui.screen.HomeScreen
@@ -61,11 +62,11 @@ fun MovieFinderAppNavigationHost(navController: NavHostController) {
         composable<SearchScreen> {
             val viewModel = hiltViewModel<SearchViewModel>()
             SearchScreen(
-                uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
+                moviePagerItems = viewModel.moviePagerState.collectAsLazyPagingItems(),
                 searchText = viewModel.searchTextState.collectAsStateWithLifecycle().value,
                 updateSearchTextAction = viewModel::updateSearchText,
                 navigateBackAction = { navController.popBackStack() },
-                navigateToMovieDetail = { movieId ->
+                navigateToMovieDetailAction = { movieId ->
                     navController.navigate(MovieDetailScreen(movieId))
                 }
             )

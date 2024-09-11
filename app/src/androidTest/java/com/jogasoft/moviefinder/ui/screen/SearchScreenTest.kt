@@ -3,13 +3,14 @@ package com.jogasoft.moviefinder.ui.screen
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
-import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.paging.PagingData
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.jogasoft.moviefinder.R
-import com.jogasoft.moviefinder.ui.viewModel.SearchUiState
+import com.jogasoft.moviefinder.data.Movie
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,9 +22,9 @@ class SearchScreenTest {
     @Before
     fun setUp() {
         rule.setContent { SearchScreen(
-            uiState =  SearchUiState(),
+            moviePagerItems = flowOf(PagingData.from(listOf<Movie>())).collectAsLazyPagingItems(),
             searchText = "",
-            navigateToMovieDetail = {},
+            navigateToMovieDetailAction = {},
             navigateBackAction = {},
             updateSearchTextAction = {}
         ) }

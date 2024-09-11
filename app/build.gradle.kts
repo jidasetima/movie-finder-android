@@ -25,8 +25,8 @@ android {
         applicationId = "com.jogasoft.moviefinder"
         minSdk = 24
         targetSdk = 34
-        versionCode = 9
-        versionName = "0.0.9"
+        versionCode = 10
+        versionName = "0.0.10"
 
         testInstrumentationRunner = "com.jogasoft.moviefinder.MovieFinderHiltTestRunner"
         vectorDrawables {
@@ -109,6 +109,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    // Paging
+    implementation(libs.androidx.paging)
+    implementation(libs.androidx.paging.compose)
+
     // Retrofit & Moshi
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
@@ -124,6 +128,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.coroutine.test)
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.androidx.paging.test)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)

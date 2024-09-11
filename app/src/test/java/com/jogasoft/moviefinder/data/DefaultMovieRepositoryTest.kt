@@ -3,6 +3,7 @@ package com.jogasoft.moviefinder.data
 import com.jogasoft.moviefinder.data.source.local.FakeMovieDao
 import com.jogasoft.moviefinder.data.source.network.FakeMovieNetworkDataSource
 import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
+import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkBelongsToCollection
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkGenre
 import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
@@ -36,6 +37,13 @@ class DefaultMovieRepositoryTest {
             voteCount = 155
         )
     }
+
+    private val networkMoviePage = NetworkMoviePage(
+        page = 1,
+        results = networkMovies,
+        totalPages = 1,
+        totalResults = networkMovies.size
+    )
 
     private val movieDetailId = 1
     private val movieDetail = NetworkMovieDetail(
@@ -91,7 +99,7 @@ class DefaultMovieRepositoryTest {
     )
 
     private val movieNetworkDataSource = FakeMovieNetworkDataSource(
-        networkMovies = networkMovies,
+        networkMoviePage = networkMoviePage,
         networkMovieDetail = movieDetail
     )
 
@@ -125,7 +133,7 @@ class DefaultMovieRepositoryTest {
 
         val synchronizedMovieList = movieRepository.observeMovies().first()
         assertTrue(synchronizedMovieList.isNotEmpty())
-        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.NOW_PLAYING  })
+        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.NOW_PLAYING })
     }
 
     @Test
@@ -151,7 +159,7 @@ class DefaultMovieRepositoryTest {
 
         val synchronizedMovieList = movieRepository.observeMovies().first()
         assertTrue(synchronizedMovieList.isNotEmpty())
-        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.POPULAR  })
+        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.POPULAR })
     }
 
     @Test
@@ -177,7 +185,7 @@ class DefaultMovieRepositoryTest {
 
         val synchronizedMovieList = movieRepository.observeMovies().first()
         assertTrue(synchronizedMovieList.isNotEmpty())
-        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.TOP_RATED  })
+        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.TOP_RATED })
     }
 
     @Test
@@ -203,7 +211,7 @@ class DefaultMovieRepositoryTest {
 
         val synchronizedMovieList = movieRepository.observeMovies().first()
         assertTrue(synchronizedMovieList.isNotEmpty())
-        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.UPCOMING  })
+        assertTrue(synchronizedMovieList.all { it.category == MovieCategory.UPCOMING })
     }
 
     @Test

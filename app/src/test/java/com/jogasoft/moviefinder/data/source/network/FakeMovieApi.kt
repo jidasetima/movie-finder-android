@@ -28,19 +28,14 @@ class FakeMovieApi(
 
     override suspend fun getUpcomingMovies(): Response<NetworkMoviePage> = getMovies()
 
-    override suspend fun searchMovies(query: String): Response<NetworkMoviePage> {
+    override suspend fun paginateSearchedMovies(
+        page: Int,
+        query: String
+    ): Response<NetworkMoviePage> {
         return when {
             shouldThrowCancellationException -> throw CancellationException("Simulated Cancellation")
             shouldReturnErrorResponse -> Response.error(500, null)
-            else -> {
-                val filteredResults = networkMoviePage.results.filter { it.title.contains(query) }
-                val filteredNetworkMoviePage = networkMoviePage.copy(
-                    results =  filteredResults,
-                    totalResults = filteredResults.size
-                )
-
-                return Response.success(filteredNetworkMoviePage)
-            }
+            else -> Response.success(networkMoviePage)
         }
     }
 
