@@ -25,8 +25,8 @@ android {
         applicationId = "com.jogasoft.moviefinder"
         minSdk = 24
         targetSdk = 34
-        versionCode = 10
-        versionName = "0.0.10"
+        versionCode = 11
+        versionName = "0.0.11"
 
         testInstrumentationRunner = "com.jogasoft.moviefinder.MovieFinderHiltTestRunner"
         vectorDrawables {
