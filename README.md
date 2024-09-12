@@ -9,6 +9,9 @@ This Movie Finder Android app is designed as a sandbox environment for experimen
   <img src=".github/images/preview_v1.gif" alt="Movie App Preview" width="250">
 </p>
 
+## Try the App
+You can download APK iterations of the Movie Finder Android App from  [Movie Finder Releases](https://github.com/jidasetima/movie-finder-android/releases) 
+
 ## Features
 - **Search Movies**: Search for movies by title with live suggestions.
   - Supports pagination with infinite scroll
