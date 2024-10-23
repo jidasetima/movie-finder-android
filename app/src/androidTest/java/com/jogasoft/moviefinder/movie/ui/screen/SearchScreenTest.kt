@@ -9,7 +9,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.jogasoft.moviefinder.R
-import com.jogasoft.moviefinder.data.Movie
+import com.jogasoft.moviefinder.movie.data.Movie
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Rule

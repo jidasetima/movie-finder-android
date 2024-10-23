@@ -1,17 +1,17 @@
-package com.jogasoft.moviefinder.data
+package com.jogasoft.moviefinder.movie.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.jogasoft.moviefinder.data.source.local.database.MovieDao
-import com.jogasoft.moviefinder.data.source.local.toMovie
-import com.jogasoft.moviefinder.data.source.local.toMovies
-import com.jogasoft.moviefinder.data.source.network.MovieNetworkDataSource
-import com.jogasoft.moviefinder.data.source.network.SearchMoviePagingSource
-import com.jogasoft.moviefinder.data.source.network.model.movie.toLocalMovie
-import com.jogasoft.moviefinder.data.source.network.model.movie.toLocalMovies
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.toMovieDetail
+import com.jogasoft.moviefinder.movie.data.source.local.database.MovieDao
+import com.jogasoft.moviefinder.movie.data.source.local.toMovie
+import com.jogasoft.moviefinder.movie.data.source.local.toMovies
+import com.jogasoft.moviefinder.movie.data.source.network.MovieNetworkDataSource
+import com.jogasoft.moviefinder.movie.data.source.network.SearchMoviePagingSource
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.toLocalMovie
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.toLocalMovies
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.toMovieDetail
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

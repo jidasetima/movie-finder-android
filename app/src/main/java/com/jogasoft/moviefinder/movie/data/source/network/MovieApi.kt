@@ -1,7 +1,7 @@
-package com.jogasoft.moviefinder.data.source.network
+package com.jogasoft.moviefinder.movie.data.source.network
 
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMoviePage
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkMovieDetail
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,10 +1,9 @@
-package com.jogasoft.moviefinder.data.source.network
+package com.jogasoft.moviefinder.movie.data.source.network
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMovie
 import kotlin.coroutines.cancellation.CancellationException
-import kotlin.random.Random
 
 class SearchMoviePagingSource(
     private val movieNetworkDataSource: MovieNetworkDataSource,

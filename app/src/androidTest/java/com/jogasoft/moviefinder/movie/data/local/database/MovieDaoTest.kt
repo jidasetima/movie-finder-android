@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.jogasoft.moviefinder.data.MovieCategory
-import com.jogasoft.moviefinder.data.source.local.LocalMovie
-import com.jogasoft.moviefinder.data.source.local.database.MovieDao
-import com.jogasoft.moviefinder.data.source.local.database.MovieFinderDatabase
+import com.jogasoft.moviefinder.movie.data.MovieCategory
+import com.jogasoft.moviefinder.movie.data.source.local.LocalMovie
+import com.jogasoft.moviefinder.movie.data.source.local.database.MovieDao
+import com.jogasoft.moviefinder.movie.data.source.local.database.MovieFinderDatabase
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue

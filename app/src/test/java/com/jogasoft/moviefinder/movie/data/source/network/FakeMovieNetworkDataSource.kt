@@ -1,9 +1,8 @@
 package com.jogasoft.moviefinder.movie.data.source.network
 
-import com.jogasoft.moviefinder.data.source.network.MovieNetworkDataSource
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMovie
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMoviePage
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkMovieDetail
 
 class FakeMovieNetworkDataSource(
     private val networkMoviePage: NetworkMoviePage,

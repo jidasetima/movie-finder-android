@@ -1,8 +1,8 @@
 package com.jogasoft.moviefinder.movie.ui.viewModel
 
-import com.jogasoft.moviefinder.data.Movie
-import com.jogasoft.moviefinder.data.MovieCategory
-import com.jogasoft.moviefinder.data.MovieDetail
+import com.jogasoft.moviefinder.movie.data.Movie
+import com.jogasoft.moviefinder.movie.data.MovieCategory
+import com.jogasoft.moviefinder.movie.data.MovieDetail
 import com.jogasoft.moviefinder.movie.data.FakeMovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

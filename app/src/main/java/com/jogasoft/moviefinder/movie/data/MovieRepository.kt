@@ -1,4 +1,4 @@
-package com.jogasoft.moviefinder.data
+package com.jogasoft.moviefinder.movie.data
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow

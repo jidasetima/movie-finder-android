@@ -14,7 +14,6 @@ import com.jogasoft.moviefinder.movie.ui.screen.MovieDetailScreen
 import com.jogasoft.moviefinder.movie.ui.screen.SearchScreen
 import com.jogasoft.moviefinder.movie.ui.viewModel.MovieCategoryListViewModel
 import com.jogasoft.moviefinder.movie.ui.viewModel.MovieDetailViewModel
-
 import com.jogasoft.moviefinder.movie.ui.viewModel.SearchViewModel
 import com.jogasoft.moviefinder.userpreferences.ui.SettingsViewModel
 import com.jogasoft.moviefinder.userpreferences.ui.screen.SettingsScreen

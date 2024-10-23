@@ -1,7 +1,7 @@
-package com.jogasoft.moviefinder.data.source.network.model.movie
+package com.jogasoft.moviefinder.movie.data.source.network.model.movie
 
-import com.jogasoft.moviefinder.data.MovieCategory
-import com.jogasoft.moviefinder.data.source.local.LocalMovie
+import com.jogasoft.moviefinder.movie.data.MovieCategory
+import com.jogasoft.moviefinder.movie.data.source.local.LocalMovie
 import com.squareup.moshi.Json
 
 data class NetworkMovie(

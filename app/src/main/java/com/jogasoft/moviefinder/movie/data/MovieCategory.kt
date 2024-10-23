@@ -1,4 +1,4 @@
-package com.jogasoft.moviefinder.data
+package com.jogasoft.moviefinder.movie.data
 
 enum class MovieCategory {
     NOW_PLAYING,

@@ -1,7 +1,7 @@
 package com.jogasoft.moviefinder.movie.ui.viewModel
 
 import androidx.lifecycle.SavedStateHandle
-import com.jogasoft.moviefinder.data.MovieDetail
+import com.jogasoft.moviefinder.movie.data.MovieDetail
 import com.jogasoft.moviefinder.movie.data.FakeMovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

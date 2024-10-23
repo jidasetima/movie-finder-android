@@ -1,7 +1,7 @@
 package com.jogasoft.moviefinder.di
 
-import com.jogasoft.moviefinder.data.DefaultMovieRepository
-import com.jogasoft.moviefinder.data.MovieRepository
+import com.jogasoft.moviefinder.movie.data.DefaultMovieRepository
+import com.jogasoft.moviefinder.movie.data.MovieRepository
 import com.jogasoft.moviefinder.userpreferences.data.DefaultUserPreferenceRepository
 import com.jogasoft.moviefinder.userpreferences.data.UserPreferenceRepository
 import dagger.Binds

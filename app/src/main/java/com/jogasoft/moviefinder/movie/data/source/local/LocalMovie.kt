@@ -1,8 +1,8 @@
-package com.jogasoft.moviefinder.data.source.local
+package com.jogasoft.moviefinder.movie.data.source.local
 
 import androidx.room.Entity
-import com.jogasoft.moviefinder.data.Movie
-import com.jogasoft.moviefinder.data.MovieCategory
+import com.jogasoft.moviefinder.movie.data.Movie
+import com.jogasoft.moviefinder.movie.data.MovieCategory
 
 @Entity(
     tableName = "movie",

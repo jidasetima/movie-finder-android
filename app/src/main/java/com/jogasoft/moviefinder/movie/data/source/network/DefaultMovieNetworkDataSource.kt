@@ -1,9 +1,9 @@
-package com.jogasoft.moviefinder.data.source.network
+package com.jogasoft.moviefinder.movie.data.source.network
 
 import android.util.Log
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMovie
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMoviePage
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkMovieDetail
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 

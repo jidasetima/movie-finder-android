@@ -1,9 +1,9 @@
-package com.jogasoft.moviefinder.data.source.local.database
+package com.jogasoft.moviefinder.movie.data.source.local.database
 
 import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.jogasoft.moviefinder.data.source.local.LocalMovie
+import com.jogasoft.moviefinder.movie.data.source.local.LocalMovie
 
 @Database(
     version = 2,

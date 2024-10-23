@@ -1,8 +1,7 @@
 package com.jogasoft.moviefinder.movie.data.source.network
 
-import com.jogasoft.moviefinder.data.source.network.MovieApi
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMoviePage
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkMovieDetail
 import retrofit2.Response
 import kotlin.coroutines.cancellation.CancellationException
 

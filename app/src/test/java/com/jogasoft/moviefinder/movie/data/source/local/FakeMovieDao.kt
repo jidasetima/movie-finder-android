@@ -1,8 +1,7 @@
 package com.jogasoft.moviefinder.movie.data.source.local
 
-import com.jogasoft.moviefinder.data.MovieCategory
-import com.jogasoft.moviefinder.data.source.local.LocalMovie
-import com.jogasoft.moviefinder.data.source.local.database.MovieDao
+import com.jogasoft.moviefinder.movie.data.MovieCategory
+import com.jogasoft.moviefinder.movie.data.source.local.database.MovieDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 

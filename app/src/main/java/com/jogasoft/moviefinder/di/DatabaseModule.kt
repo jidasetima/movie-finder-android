@@ -2,8 +2,8 @@ package com.jogasoft.moviefinder.di
 
 import android.content.Context
 import androidx.room.Room
-import com.jogasoft.moviefinder.data.source.local.database.MovieDao
-import com.jogasoft.moviefinder.data.source.local.database.MovieFinderDatabase
+import com.jogasoft.moviefinder.movie.data.source.local.database.MovieDao
+import com.jogasoft.moviefinder.movie.data.source.local.database.MovieFinderDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

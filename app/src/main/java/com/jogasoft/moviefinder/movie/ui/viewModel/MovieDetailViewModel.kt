@@ -3,8 +3,8 @@ package com.jogasoft.moviefinder.movie.ui.viewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jogasoft.moviefinder.data.MovieDetail
-import com.jogasoft.moviefinder.data.MovieRepository
+import com.jogasoft.moviefinder.movie.data.MovieDetail
+import com.jogasoft.moviefinder.movie.data.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

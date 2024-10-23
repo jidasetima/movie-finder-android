@@ -1,8 +1,8 @@
-package com.jogasoft.moviefinder.data.source.network
+package com.jogasoft.moviefinder.movie.data.source.network
 
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMovie
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMoviePage
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkMovieDetail
 
 interface MovieNetworkDataSource {
     suspend fun getNowPlayingMovies(): Result<List<NetworkMovie>>

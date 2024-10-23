@@ -32,8 +32,8 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.jogasoft.moviefinder.BuildConfig
 import com.jogasoft.moviefinder.R
 import com.jogasoft.moviefinder.core.ui.theme.MovieFinderTheme
-import com.jogasoft.moviefinder.data.Movie
-import com.jogasoft.moviefinder.data.MovieCategory
+import com.jogasoft.moviefinder.movie.data.Movie
+import com.jogasoft.moviefinder.movie.data.MovieCategory
 import com.jogasoft.moviefinder.movie.ui.component.MovieItemImageLoader
 import com.jogasoft.moviefinder.movie.ui.component.MovieItemNoImagePlaceholder
 import kotlinx.coroutines.flow.flowOf

@@ -1,11 +1,11 @@
-package com.jogasoft.moviefinder.data.source.local.database
+package com.jogasoft.moviefinder.movie.data.source.local.database
 
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Upsert
-import com.jogasoft.moviefinder.data.MovieCategory
-import com.jogasoft.moviefinder.data.source.local.LocalMovie
+import com.jogasoft.moviefinder.movie.data.MovieCategory
+import com.jogasoft.moviefinder.movie.data.source.local.LocalMovie
 import kotlinx.coroutines.flow.Flow
 
 @Dao

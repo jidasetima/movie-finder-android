@@ -4,9 +4,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.testing.asPagingSourceFactory
-import com.jogasoft.moviefinder.data.Movie
-import com.jogasoft.moviefinder.data.MovieDetail
-import com.jogasoft.moviefinder.data.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 

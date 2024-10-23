@@ -1,14 +1,13 @@
 package com.jogasoft.moviefinder.movie.data.source.network
 
-import com.jogasoft.moviefinder.data.source.network.DefaultMovieNetworkDataSource
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMovie
-import com.jogasoft.moviefinder.data.source.network.model.movie.NetworkMoviePage
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkBelongsToCollection
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkGenre
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkMovieDetail
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkProductionCompany
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkProductionCountry
-import com.jogasoft.moviefinder.data.source.network.model.movieDetail.NetworkSpokenLanguage
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMovie
+import com.jogasoft.moviefinder.movie.data.source.network.model.movie.NetworkMoviePage
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkBelongsToCollection
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkGenre
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkMovieDetail
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkProductionCompany
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkProductionCountry
+import com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail.NetworkSpokenLanguage
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before

@@ -23,7 +23,7 @@ import coil.compose.SubcomposeAsyncImage
 import com.jogasoft.moviefinder.BuildConfig
 import com.jogasoft.moviefinder.core.ui.component.MovieFinderAppBar
 import com.jogasoft.moviefinder.core.ui.theme.MovieFinderTheme
-import com.jogasoft.moviefinder.data.MovieDetail
+import com.jogasoft.moviefinder.movie.data.MovieDetail
 import com.jogasoft.moviefinder.movie.ui.viewModel.MovieDetailUiState
 
 //Test tags

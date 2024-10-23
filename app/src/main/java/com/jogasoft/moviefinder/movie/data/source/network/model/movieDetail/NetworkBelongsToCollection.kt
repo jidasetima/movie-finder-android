@@ -1,4 +1,4 @@
-package com.jogasoft.moviefinder.data.source.network.model.movieDetail
+package com.jogasoft.moviefinder.movie.data.source.network.model.movieDetail
 
 import com.squareup.moshi.Json
 

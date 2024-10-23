@@ -1,4 +1,4 @@
-package com.jogasoft.moviefinder.data.source.network
+package com.jogasoft.moviefinder.movie.data.source.network
 
 class NetworkException(
     message: String,
