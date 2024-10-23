@@ -22,6 +22,7 @@ You can download APK iterations of the Movie Finder Android App from  [Movie Fin
   - Upcoming
 - **Movie Details**: Select a movie from any category to view detailed information such as the overview, release date, and backdrop image.
 - **Offline Support**: Previously fetched movie categories can be viewed even without an internet connection.
+- **User Theme Selection**: Choose your preferred theme for the app, with the selection saved across sessions for a personalized experience.
 - **Future Enhancements**:
   - More features will be added (TBD).
 
