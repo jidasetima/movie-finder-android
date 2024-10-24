@@ -46,8 +46,8 @@ jobs:
           echo "version_main=${VERSION_MAIN}" >> $GITHUB_ENV
       - name: Compare ${{ github.ref }} branch and Main branch versions
         run: |
-          if [ "$VERSION_PR" -l "$VERSION_MAIN" ]; then
-            echo "VersionCode on PR branch ${VERSION_PR} is not greater than on the main branch ${VERSION_MAIN}."
+          if [ "version_pr" -l "$version_main" ]; then
+            echo "VersionCode on PR branch ($version_pr) is not greater than on the main branch ($version_main)."
             exit 1
           else
             echo "VersionCode on PR branch is greater than on the main branch."
