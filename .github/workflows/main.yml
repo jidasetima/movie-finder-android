@@ -50,7 +50,7 @@ jobs:
             echo "VersionCode on PR branch ($version_pr) is not greater than on the main branch ($version_main)."
             exit 1
           else
-            echo "VersionCode on PR branch is greater than on the main branch."
+            echo "VersionCode on PR branch ($version_pr) is greater than on the main branch ($version_main)."
           fi
   unit-test:
     needs: build
