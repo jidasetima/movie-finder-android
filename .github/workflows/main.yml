@@ -28,6 +28,30 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - run: echo "The build job's status is ${{ job.status }}."
+  check-version-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout and clone repository branch ${{ github.ref }}
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch the entire history, including all branches
+      - name: Extract version code from Pull Request branch ${{ github.ref }}
+        run: |
+          VERSION_PR=$(grep -oP '(?<=versionCode = )\d+' app/build.gradle.kts)
+          echo "version_pr=${VERSION_PR}" >> $GITHUB_ENV
+      - name: Extract version code from Main branch
+        run: |
+          git checkout main
+          VERSION_MAIN=$(grep -oP '(?<=versionCode = )\d+' app/build.gradle.kts)
+          echo "version_main=${VERSION_MAIN}" >> $GITHUB_ENV
+      - name: Compare ${{ github.ref }} branch and Main branch versions
+        run: |
+          if [ "$version_pr" -le "$version_main" ]; then
+            echo "VersionCode on PR branch ($version_pr) is not greater than on the main branch ($version_main)."
+            exit 1
+          else
+            echo "VersionCode on PR branch ($version_pr) is greater than on the main branch ($version_main)."
+          fi
   unit-test:
     needs: build
     runs-on: ubuntu-latest
