@@ -102,6 +102,9 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
 
+    // DataStore
+    implementation(libs.androidx.datastore)
+
     // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)

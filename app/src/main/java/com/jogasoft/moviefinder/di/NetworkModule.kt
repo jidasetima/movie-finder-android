@@ -1,9 +1,9 @@
 package com.jogasoft.moviefinder.di
 
 import com.jogasoft.moviefinder.BuildConfig
-import com.jogasoft.moviefinder.data.source.network.DefaultMovieNetworkDataSource
-import com.jogasoft.moviefinder.data.source.network.MovieApi
-import com.jogasoft.moviefinder.data.source.network.MovieNetworkDataSource
+import com.jogasoft.moviefinder.movie.data.source.network.DefaultMovieNetworkDataSource
+import com.jogasoft.moviefinder.movie.data.source.network.MovieApi
+import com.jogasoft.moviefinder.movie.data.source.network.MovieNetworkDataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds

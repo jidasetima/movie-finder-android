@@ -8,5 +8,6 @@
     <string name="back_navigation_arrow_button">Back Navigation Arrow Button</string>
     <string name="clear_search_button">Clear Search Button</string>
     <string name="search_icon_button">Search Icon Button</string>
+    <string name="settings_icon_button">Settings Icon Button</string>
     <string name="movie_title_content_description">%1$s image</string>
 </resources>
